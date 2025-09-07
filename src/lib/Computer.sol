@@ -32,7 +32,7 @@ library Computer {
 
     /// @notice Returns an 8 element array representing each individual bit for
     ///         a given byte, ordered in LSB (Least Significant Bit) format.
-    function _computeByteToBitArray(bytes1 b) internal pure returns (uint8[BIT_LENGTH] memory bits) {
+    function _computeByteToBitArray(bytes1 b) private pure returns (uint8[BIT_LENGTH] memory bits) {
         for (uint8 i = 0; i < BIT_LENGTH; i++) {
             if ((uint8(b) & (1 << i)) > 0) {
                 bits[i] = 1;
