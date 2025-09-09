@@ -9,10 +9,11 @@ import { Extractor } from "./lib/Extractor.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { Fee } from "./Fee.sol";
+import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import { TinyMerkleTree } from "@fifteenfigures/TinyMerkleTree.sol";
 import { Groth16Verifier } from "./Verifier.sol";
 
-abstract contract Main is IMain, Fee, Groth16Verifier {
+abstract contract Main is IMain, Fee, ReentrancyGuard, Groth16Verifier {
     using Extractor for bytes;
 
     mapping(bytes32 depositLeaf => address depositor) internal deposits;
