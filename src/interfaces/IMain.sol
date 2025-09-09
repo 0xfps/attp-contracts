@@ -4,6 +4,11 @@ pragma solidity ^0.8.28;
 interface IMain {
     event DepositAdded(bytes32 indexed leaf);
 
+    error KeyAlreadyUsed(bytes32 leaf);
+    error ProofNotVerified();
+    error RootNotInHistory(bytes32 root);
+    error WithdrawalExceedsMax(uint256 withdrawal);
+
     function generateKeys(
         address asset,
         uint256 amount,
@@ -17,7 +22,7 @@ interface IMain {
     function getMaxWithdrawalOnKey(bytes calldata key) external pure returns (uint256 maxWithdrawal);
     function getMaxWithdrawalOnAmount(uint256 amount) external pure returns (uint256 maxWithdrawal);
 
-    function getDeposit(bytes32 leaf) external view returns (address depositor);
+    function getDeposit(bytes32 leaf) external view returns (address);
 
     function deposit(bytes calldata depositKey, bytes32 standardizedKey) external payable;
 

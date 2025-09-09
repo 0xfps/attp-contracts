@@ -58,18 +58,19 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
         maxWithdrawal = amount - fee;
     }
 
-    function getDeposit(bytes32 leaf) public view returns (address depositor) {
+    function getDeposit(bytes32 leaf) public view returns (address) {
         return deposits[leaf];
     }
 
     function deposit(bytes calldata depositKey, bytes32 standardizedKey) public payable {
-        if (leafExists(standardizedKey)) revert("Key already used!");
+        if (leafExists(standardizedKey)) revert KeyAlreadyUsed(standardizedKey);
+
         (, address asset, uint256 amount) = depositKey._extractKeyMetadata();
 
         leaves[standardizedKey] = true;
         deposits[standardizedKey] = msg.sender;
 
-        uint256 depositAmount = getMaxWithdrawalOnKey(depositKey);
+        uint256 depositAmount = getMaxWithdrawalOnAmount(amount);
         _takeFee(IERC20(asset), amount);
 
         if (asset != NATIVE_TOKEN)
@@ -87,21 +88,21 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
         uint256[2] calldata pC,     // Proof.
         address recipient,
         uint256 amount
-    ) external {
-        if (!_rootIsInHistory(root)) revert("This root is not in history!");
+    ) public nonReentrant {
+        if (!_rootIsInHistory(root)) revert RootNotInHistory(root);
         (, address asset, uint256 amountInKey) = withdrawalKey._extractKeyMetadata();
 
         uint256 maxWithdrawable = getMaxWithdrawalOnAmount(amountInKey);
         uint256 amountWithdrawn = withdrawals[withdrawalKey];
 
-        if ((amountWithdrawn + amount) > maxWithdrawable) revert("Withdrawal exceeds max!");
+        if ((amountWithdrawn + amount) > maxWithdrawable) revert WithdrawalExceedsMax(amount);
         withdrawals[withdrawalKey] += amount;
 
         uint256[928] memory publicSignals = Computer._computePublicSignals(root, withdrawalKey);
-        if (!this.verifyProof(pA, pB, pC, publicSignals)) revert("Proof not verified!");
+        if (!this.verifyProof(pA, pB, pC, publicSignals)) revert ProofNotVerified();
 
         if (asset == NATIVE_TOKEN) {
-            (bool sent, ) = recipient.call { value: amount} ("");
+            (bool sent, ) = recipient.call { value: amount}("");
             require(sent);
         } else IERC20(asset).safeTransfer(recipient, amount);
     }
