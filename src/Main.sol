@@ -55,6 +55,9 @@ abstract contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Ve
         if (leaves[standardizedKey]) revert("Key already used!");
         (, address asset, uint256 amount) = depositKey._extractKeyMetadata();
 
+        leaves[standardizedKey] = true;
+        deposits[standardizedKey] = msg.sender;
+
         uint256 depositAmount = getMaxWithdrawal(depositKey);
         _takeFee(IERC20(asset), amount);
         IERC20(asset).safeTransferFrom(msg.sender, address(this), depositAmount);
