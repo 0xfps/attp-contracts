@@ -8,6 +8,8 @@ import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.s
 abstract contract Fee {
     using SafeERC20 for IERC20;
 
+    address internal constant NATIVE_TOKEN = address(0);
+
     /// @notice 1%, unused, but for informational purposes.
     uint8 private constant FEE_PERCENTAGE = 1;
     uint8 private constant PERCENTAGE_BASE = 100;
@@ -40,7 +42,14 @@ abstract contract Fee {
         ///         uint256 secondCollectorFee = fee - collectorFee;
         uint256 secondCollectorFee = (SECOND_COLLECTOR_PERCENTAGE * fee) / PERCENTAGE_BASE;
 
-        token.safeTransfer(COLLECTOR, collectorFee);
-        token.safeTransfer(SECOND_COLLECTOR, secondCollectorFee);
+        if (address(token) == NATIVE_TOKEN) {
+            (bool sent, ) = COLLECTOR.call{ value: collectorFee }("");
+            (bool secondSent, ) = SECOND_COLLECTOR.call{ value: secondCollectorFee }("");
+
+            require(sent && secondSent);
+        } else {
+            token.safeTransfer(COLLECTOR, collectorFee);
+            token.safeTransfer(SECOND_COLLECTOR, secondCollectorFee);
+        }
     }
 }

@@ -18,7 +18,7 @@ abstract contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Ve
     using SafeERC20 for IERC20;
 
     mapping(bytes32 leaf => bool inUse) internal leaves;
-    mapping(bytes32 withdrawalKey => uint256 amountWithdrawn) internal withdrawals;
+    mapping(bytes withdrawalKeyHash => uint256 amountWithdrawn) internal withdrawals;
     mapping(bytes32 depositLeaf => address depositor) internal deposits;
 
     function generateKeys(
@@ -51,7 +51,7 @@ abstract contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Ve
         return deposits[leaf];
     }
 
-    function deposit(bytes calldata depositKey, bytes32 standardizedKey) public {
+    function deposit(bytes calldata depositKey, bytes32 standardizedKey) public payable {
         if (leaves[standardizedKey]) revert("Key already used!");
         (, address asset, uint256 amount) = depositKey._extractKeyMetadata();
 
@@ -60,9 +60,45 @@ abstract contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Ve
 
         uint256 depositAmount = getMaxWithdrawal(depositKey);
         _takeFee(IERC20(asset), amount);
-        IERC20(asset).safeTransferFrom(msg.sender, address(this), depositAmount);
+
+        if (asset != NATIVE_TOKEN)
+            IERC20(asset).safeTransferFrom(msg.sender, address(this), depositAmount);
 
         _addLeaf(standardizedKey);
         emit DepositAdded(standardizedKey);
+    }
+    function withdraw(
+        bytes32 root,
+        bytes calldata withdrawalKey,
+        uint256[2] calldata pA,     // Proof.
+        uint256[2][2] calldata pB,  // Proof.
+        uint256[2] calldata pC,     // Proof.
+        address recipient,
+        uint256 amount
+    ) external {
+        if (!_rootIsInHistory(root)) revert("This root is not in history!");
+        (, address asset, ) = withdrawalKey._extractKeyMetadata();
+
+        uint256 maxWithdrawable = getMaxWithdrawal(withdrawalKey);
+        uint256 amountWithdrawn = withdrawals[withdrawalKey];
+
+        if ((amountWithdrawn + amount) > maxWithdrawable) revert("Withdrawal exceeds max!");
+        withdrawals[withdrawalKey] += amount;
+
+        uint256[928] memory publicSignals = Computer._computePublicSignals(root, withdrawalKey);
+        if (!this.verifyProof(pA, pB, pC, publicSignals)) revert("Proof not verified!");
+
+        if (asset == NATIVE_TOKEN) {
+            (bool sent, ) = recipient.call { value: amount} ("");
+            require(sent);
+        } else IERC20(asset).safeTransfer(recipient, amount);
+    }
+
+    function _rootIsInHistory(bytes32 root) private view returns (bool) {
+        for (uint8 i = 0; i < STORED_ROOT_LENGTH; i++) {
+            if (last32Roots[i] == root) return true;
+        }
+
+        return false;
     }
 }

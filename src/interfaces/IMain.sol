@@ -17,7 +17,7 @@ interface IMain {
 
     function getDeposit(bytes32 leaf) external view returns (address depositor);
 
-    function deposit(bytes calldata depositKey, bytes32 standardizedKey) external;
+    function deposit(bytes calldata depositKey, bytes32 standardizedKey) external payable;
 
     function withdraw(
         bytes32 root,
