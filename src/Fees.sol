@@ -15,13 +15,9 @@ abstract contract Fees {
     uint8 private constant COLLECTOR_PERCENTAGE = 90; // 90% of 1% fee.
     uint8 private constant SECOND_COLLECTOR_PERCENTAGE = 10; // 10% of 1% fee.
 
-    address private immutable COLLECTOR; // 90% goes to this guy.
-    address private immutable SECOND_COLLECTOR; // 10% goes to this guy.
-
-    constructor(address collector, address secondCollector) {
-        COLLECTOR = collector;
-        SECOND_COLLECTOR = secondCollector;
-    }
+    // @todo Update addresses.
+    address private constant COLLECTOR = address(90); // 90% goes to this guy.
+    address private constant SECOND_COLLECTOR = address(10); // 10% goes to this guy.
 
     /// @notice For UI purposes.
     function calculateFee(uint256 amount) public pure returns (uint256 fee) {
