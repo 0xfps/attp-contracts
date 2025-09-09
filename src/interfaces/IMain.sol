@@ -13,10 +13,8 @@ interface IMain {
         bytes memory depositKey
     );
 
-    function getMaxWithdrawal(
-        bytes calldata withdrawalKey
-    ) external pure returns (uint256 maxWithdrawal);
-    
+    function getMaxWithdrawal(bytes calldata key) external pure returns (uint256 maxWithdrawal);
+
     function getDeposit(bytes32 leaf) external view returns (address depositor);
 
     function deposit(bytes calldata depositKey, bytes32 standardizedKey) external;
