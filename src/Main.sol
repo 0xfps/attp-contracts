@@ -40,10 +40,13 @@ abstract contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Ve
         );
     }
 
-    function getMaxWithdrawal(bytes calldata key) public pure returns (uint256 maxWithdrawal) {
+    function getMaxWithdrawalOnKey(bytes calldata key) public pure returns (uint256 maxWithdrawal) {
         (, , uint256 amount) = key._extractKeyMetadata();
-        uint256 fee = calculateFee(amount);
+        maxWithdrawal = getMaxWithdrawalOnAmount(amount);
+    }
 
+    function getMaxWithdrawalOnAmount(uint256 amount) public pure returns (uint256 maxWithdrawal) {
+        uint256 fee = calculateFee(amount);
         maxWithdrawal = amount - fee;
     }
 
@@ -58,7 +61,7 @@ abstract contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Ve
         leaves[standardizedKey] = true;
         deposits[standardizedKey] = msg.sender;
 
-        uint256 depositAmount = getMaxWithdrawal(depositKey);
+        uint256 depositAmount = getMaxWithdrawalOnKey(depositKey);
         _takeFee(IERC20(asset), amount);
 
         if (asset != NATIVE_TOKEN)
@@ -77,9 +80,9 @@ abstract contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Ve
         uint256 amount
     ) external {
         if (!_rootIsInHistory(root)) revert("This root is not in history!");
-        (, address asset, ) = withdrawalKey._extractKeyMetadata();
+        (, address asset, uint256 amountInKey) = withdrawalKey._extractKeyMetadata();
 
-        uint256 maxWithdrawable = getMaxWithdrawal(withdrawalKey);
+        uint256 maxWithdrawable = getMaxWithdrawalOnAmount(amountInKey);
         uint256 amountWithdrawn = withdrawals[withdrawalKey];
 
         if ((amountWithdrawn + amount) > maxWithdrawable) revert("Withdrawal exceeds max!");
