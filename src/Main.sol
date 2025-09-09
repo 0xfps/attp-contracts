@@ -27,12 +27,14 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
         address asset,
         uint256 amount,
         bytes16 secretKey
-    ) public pure returns (
+    ) public view returns (
         bytes memory withdrawalKey,
         bytes memory depositKey
     ) {
         withdrawalKey = abi.encodePacked(
-            keccak256(abi.encodePacked(secretKey)), asset, amount
+            keccak256(
+                abi.encodePacked(msg.sender, block.timestamp, block.chainid, secretKey)
+            ), asset, amount
         );
 
         depositKey = abi.encodePacked(
@@ -40,6 +42,10 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
                 abi.encodePacked(withdrawalKey, secretKey)
             ), asset, amount
         );
+    }
+
+    function leafExists(bytes32 leaf) public view returns (bool) {
+        return leaves[leaf];
     }
 
     function getMaxWithdrawalOnKey(bytes calldata key) public pure returns (uint256 maxWithdrawal) {
@@ -57,7 +63,7 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
     }
 
     function deposit(bytes calldata depositKey, bytes32 standardizedKey) public payable {
-        if (leaves[standardizedKey]) revert("Key already used!");
+        if (leafExists(standardizedKey)) revert("Key already used!");
         (, address asset, uint256 amount) = depositKey._extractKeyMetadata();
 
         leaves[standardizedKey] = true;

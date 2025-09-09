@@ -8,11 +8,12 @@ interface IMain {
         address asset,
         uint256 amount,
         bytes16 secretKey
-    ) external pure returns (
+    ) external view returns (
         bytes memory withdrawalKey,
         bytes memory depositKey
     );
 
+    function leafExists(bytes32 leaf) external view returns (bool);
     function getMaxWithdrawalOnKey(bytes calldata key) external pure returns (uint256 maxWithdrawal);
     function getMaxWithdrawalOnAmount(uint256 amount) external pure returns (uint256 maxWithdrawal);
 
