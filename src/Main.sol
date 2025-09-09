@@ -78,6 +78,7 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
         _addLeaf(standardizedKey);
         emit DepositAdded(standardizedKey);
     }
+    
     function withdraw(
         bytes32 root,
         bytes calldata withdrawalKey,
