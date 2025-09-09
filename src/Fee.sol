@@ -5,7 +5,7 @@ import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
-abstract contract Fees {
+abstract contract Fee {
     using SafeERC20 for IERC20;
 
     /// @notice 1%, unused, but for informational purposes.
@@ -24,11 +24,15 @@ abstract contract Fees {
         fee = _calculateFee(amount);
     }
 
-    function _calculateFee(uint256 amount) internal pure returns (uint256 fee) {
+    function _takeFee(IERC20 token, uint256 amount) internal {
+        _distributeFee(token, _calculateFee(amount));
+    }
+
+    function _calculateFee(uint256 amount) private pure returns (uint256 fee) {
         fee = amount / PERCENTAGE_BASE;
     }
 
-    function _distributeFee(IERC20 token, uint256 fee) internal {
+    function _distributeFee(IERC20 token, uint256 fee) private {
         uint256 collectorFee = (COLLECTOR_PERCENTAGE * fee) / PERCENTAGE_BASE;
 
         /// @notice Yeah, the commented line below works and is a better option,

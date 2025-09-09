@@ -8,11 +8,11 @@ import { Computer } from "./lib/Computer.sol";
 import { Extractor } from "./lib/Extractor.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
-import { Fees } from "./Fees.sol";
+import { Fee } from "./Fee.sol";
 import { TinyMerkleTree } from "@fifteenfigures/TinyMerkleTree.sol";
 import { Groth16Verifier } from "./Verifier.sol";
 
-abstract contract Main is IMain, Fees, Groth16Verifier {
+abstract contract Main is IMain, Fee, Groth16Verifier {
     using Extractor for bytes;
 
     mapping(bytes32 depositLeaf => address depositor) internal deposits;
@@ -40,7 +40,7 @@ abstract contract Main is IMain, Fees, Groth16Verifier {
         bytes calldata withdrawalKey
     ) external pure returns (uint256 maxWithdrawal) {
         (, , uint256 amount) = withdrawalKey._extractKeyMetadata();
-        uint256 fee = _calculateFee(amount);
+        uint256 fee = calculateFee(amount);
 
         maxWithdrawal = amount - fee;
     }
