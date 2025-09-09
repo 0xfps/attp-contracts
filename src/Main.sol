@@ -13,13 +13,15 @@ import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.s
 import { TinyMerkleTree } from "@fifteenfigures/TinyMerkleTree.sol";
 import { Groth16Verifier } from "./Verifier.sol";
 
-abstract contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
+contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
     using Extractor for bytes;
     using SafeERC20 for IERC20;
 
     mapping(bytes32 leaf => bool inUse) internal leaves;
     mapping(bytes withdrawalKeyHash => uint256 amountWithdrawn) internal withdrawals;
     mapping(bytes32 depositLeaf => address depositor) internal deposits;
+
+    constructor (bytes32 initLeaf) TinyMerkleTree (initLeaf) {}
 
     function generateKeys(
         address asset,
