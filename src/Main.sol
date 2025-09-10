@@ -21,7 +21,9 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
     mapping(uint256 nullifier => bool used) internal nullifierUsed;
     mapping(bytes withdrawalKeyHash => uint256 amountWithdrawn) internal withdrawals;
 
-    constructor (bytes32 initLeaf) TinyMerkleTree (initLeaf) {}
+    constructor (bytes32 initLeaf) TinyMerkleTree (initLeaf) {
+        emit DepositAdded(initLeaf);
+    }
 
     function deposit(bytes calldata depositKey, bytes32 standardizedKey) public payable {
         if (_leafExists(standardizedKey)) revert KeyAlreadyUsed(standardizedKey);
