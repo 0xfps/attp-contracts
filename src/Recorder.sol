@@ -13,7 +13,7 @@ abstract contract Recorder {
     struct DepositInfo {
         UserInfo info;
         uint256 uniqueDeposits;
-        uint256 currentDeposits;
+        uint256 currentDeposit;
     }
 
     mapping(bytes32 leaf => bool inUse) internal leaves;
@@ -29,7 +29,7 @@ abstract contract Recorder {
 
         depositDelta.info = deposits[standardizedKey];
         depositDelta.uniqueDeposits = uniqueDepositCount[asset];
-        depositDelta.currentDeposits = asset == address(0) 
+        depositDelta.currentDeposit = asset == address(0) 
             ? address(this).balance
             : IERC20(asset).balanceOf(address(this));
 
