@@ -19,9 +19,8 @@ abstract contract Recorder {
     mapping(bytes32 leaf => bool inUse) internal leaves;
     
     mapping(bytes32 depositLeaf => UserInfo info) internal deposits;
-
     mapping(address asset => mapping(address depositor => bool)) internal uniqueDeposit;
-    mapping(address asset => uint256 depotits) internal uniqueDepositCount;
+    mapping(address asset => uint256 deposits) internal uniqueDepositCount;
 
     function getDepositDelta(bytes32 standardizedKey) public view returns (DepositInfo memory) {
         address asset = deposits[standardizedKey].asset;
