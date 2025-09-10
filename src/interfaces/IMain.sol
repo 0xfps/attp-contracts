@@ -5,6 +5,7 @@ interface IMain {
     event DepositAdded(bytes32 indexed leaf);
 
     error KeyAlreadyUsed(bytes32 leaf);
+    error NullifierUsed(uint256 nullifier);
     error ProofNotVerified();
     error RootNotInHistory(bytes32 root);
     error WithdrawalExceedsMax(uint256 withdrawal);

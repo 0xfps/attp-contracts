@@ -18,6 +18,7 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
     using Extractor for bytes;
     using SafeERC20 for IERC20;
 
+    mapping(uint256 nullifier => bool used) internal nullifierUsed;
     mapping(bytes withdrawalKeyHash => uint256 amountWithdrawn) internal withdrawals;
 
     constructor (bytes32 initLeaf) TinyMerkleTree (initLeaf) {}
@@ -48,9 +49,11 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         address recipient,
         uint256 amount
     ) public nonReentrant {
-        nullifier; // @todo Utilize this.
-
         if (!_rootIsInHistory(root)) revert RootNotInHistory(root);
+
+        if (nullifierUsed[nullifier]) revert NullifierUsed(nullifier);
+        nullifierUsed[nullifier] = true;
+
         (, address asset, uint256 amountInKey) = withdrawalKey._extractKeyMetadata();
 
         uint256 maxWithdrawable = _getMaxWithdrawalOnAmount(amountInKey);
