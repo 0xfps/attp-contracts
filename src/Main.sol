@@ -8,7 +8,7 @@ import { Computer } from "./lib/Computer.sol";
 import { Extractor } from "./lib/Extractor.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
-import { Fee } from "./Fee.sol";
+import { NATIVE_TOKEN, Fee } from "./Fee.sol";
 import { Recorder } from "./Recorder.sol";
 import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import { TinyMerkleTree } from "@fifteenfigures/TinyMerkleTree.sol";
