@@ -23,54 +23,15 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
 
     constructor (bytes32 initLeaf) TinyMerkleTree (initLeaf) {}
 
-    function generateKeys(
-        address asset,
-        uint256 amount,
-        bytes16 secretKey
-    ) public view returns (
-        bytes memory withdrawalKey,
-        bytes memory depositKey
-    ) {
-        withdrawalKey = abi.encodePacked(
-            keccak256(
-                abi.encodePacked(msg.sender, block.timestamp, block.chainid, secretKey)
-            ), asset, amount
-        );
-
-        depositKey = abi.encodePacked(
-            keccak256(
-                abi.encodePacked(withdrawalKey, secretKey)
-            ), asset, amount
-        );
-    }
-
-    function leafExists(bytes32 leaf) public view returns (bool) {
-        return leaves[leaf];
-    }
-
-    function getMaxWithdrawalOnKey(bytes calldata key) public pure returns (uint256 maxWithdrawal) {
-        (, , uint256 amount) = key._extractKeyMetadata();
-        maxWithdrawal = getMaxWithdrawalOnAmount(amount);
-    }
-
-    function getMaxWithdrawalOnAmount(uint256 amount) public pure returns (uint256 maxWithdrawal) {
-        uint256 fee = calculateFee(amount);
-        maxWithdrawal = amount - fee;
-    }
-
-    function getDeposit(bytes32 leaf) public view returns (address) {
-        return deposits[leaf];
-    }
-
     function deposit(bytes calldata depositKey, bytes32 standardizedKey) public payable {
-        if (leafExists(standardizedKey)) revert KeyAlreadyUsed(standardizedKey);
+        if (_leafExists(standardizedKey)) revert KeyAlreadyUsed(standardizedKey);
 
         (, address asset, uint256 amount) = depositKey._extractKeyMetadata();
 
         leaves[standardizedKey] = true;
         deposits[standardizedKey] = msg.sender;
 
-        uint256 depositAmount = getMaxWithdrawalOnAmount(amount);
+        uint256 depositAmount = _getMaxWithdrawalOnAmount(amount);
         _takeFee(IERC20(asset), amount);
 
         if (asset != NATIVE_TOKEN)
@@ -92,7 +53,7 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
         if (!_rootIsInHistory(root)) revert RootNotInHistory(root);
         (, address asset, uint256 amountInKey) = withdrawalKey._extractKeyMetadata();
 
-        uint256 maxWithdrawable = getMaxWithdrawalOnAmount(amountInKey);
+        uint256 maxWithdrawable = _getMaxWithdrawalOnAmount(amountInKey);
         uint256 amountWithdrawn = withdrawals[withdrawalKey];
 
         if ((amountWithdrawn + amount) > maxWithdrawable) revert WithdrawalExceedsMax(amount);
@@ -105,6 +66,15 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
             (bool sent, ) = recipient.call { value: amount}("");
             require(sent);
         } else IERC20(asset).safeTransfer(recipient, amount);
+    }
+
+    function _leafExists(bytes32 leaf) internal view returns (bool) {
+        return leaves[leaf];
+    }
+
+    function _getMaxWithdrawalOnAmount(uint256 amount) internal pure returns (uint256 maxWithdrawal) {
+        uint256 fee = _calculateFee(amount);
+        maxWithdrawal = amount - fee;
     }
 
     function _rootIsInHistory(bytes32 root) private view returns (bool) {
