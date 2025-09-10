@@ -21,16 +21,11 @@ abstract contract Fee {
     address private constant COLLECTOR = address(90); // 90% goes to this guy.
     address private constant SECOND_COLLECTOR = address(10); // 10% goes to this guy.
 
-    /// @notice For UI purposes.
-    function calculateFee(uint256 amount) public pure returns (uint256 fee) {
-        fee = _calculateFee(amount);
-    }
-
     function _takeFee(IERC20 token, uint256 amount) internal {
         _distributeFee(token, _calculateFee(amount));
     }
 
-    function _calculateFee(uint256 amount) private pure returns (uint256 fee) {
+    function _calculateFee(uint256 amount) internal pure returns (uint256 fee) {
         fee = amount / PERCENTAGE_BASE;
     }
 

@@ -9,21 +9,6 @@ interface IMain {
     error RootNotInHistory(bytes32 root);
     error WithdrawalExceedsMax(uint256 withdrawal);
 
-    function generateKeys(
-        address asset,
-        uint256 amount,
-        bytes16 secretKey
-    ) external view returns (
-        bytes memory withdrawalKey,
-        bytes memory depositKey
-    );
-
-    function leafExists(bytes32 leaf) external view returns (bool);
-    function getMaxWithdrawalOnKey(bytes calldata key) external pure returns (uint256 maxWithdrawal);
-    function getMaxWithdrawalOnAmount(uint256 amount) external pure returns (uint256 maxWithdrawal);
-
-    function getDeposit(bytes32 leaf) external view returns (address);
-
     function deposit(bytes calldata depositKey, bytes32 standardizedKey) external payable;
 
     function withdraw(
@@ -32,6 +17,7 @@ interface IMain {
         uint256[2] calldata pA,     // Proof.
         uint256[2][2] calldata pB,  // Proof.
         uint256[2] calldata pC,     // Proof.
+        uint256 nullifier,
         address receipient,
         uint256 amount
     ) external;
