@@ -5,10 +5,10 @@ import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
+address constant NATIVE_TOKEN = address(0);
+
 abstract contract Fee {
     using SafeERC20 for IERC20;
-
-    address internal constant NATIVE_TOKEN = address(0);
 
     /// @notice 1%, unused, but for informational purposes.
     uint8 private constant FEE_PERCENTAGE = 1;

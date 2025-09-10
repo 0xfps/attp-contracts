@@ -3,6 +3,8 @@ pragma solidity ^0.8.28;
 
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
+import { NATIVE_TOKEN } from "./Fee.sol";
+
 abstract contract Recorder {
     struct UserInfo {
         address depositor;
@@ -29,7 +31,7 @@ abstract contract Recorder {
 
         depositDelta.info = deposits[standardizedKey];
         depositDelta.uniqueDeposits = uniqueDepositCount[asset];
-        depositDelta.currentDeposit = asset == address(0) 
+        depositDelta.currentDeposit = asset == NATIVE_TOKEN 
             ? address(this).balance
             : IERC20(asset).balanceOf(address(this));
 
@@ -47,7 +49,7 @@ abstract contract Recorder {
     function _recordDeposit(bytes32 standardizedKey, address asset) internal {
         leaves[standardizedKey] = true;
 
-        uint256 updatedAmount = asset == address(0) 
+        uint256 updatedAmount = asset == NATIVE_TOKEN 
             ? address(this).balance
             : IERC20(asset).balanceOf(address(this));
 
