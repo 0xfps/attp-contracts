@@ -9,17 +9,16 @@ import { Extractor } from "./lib/Extractor.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { Fee } from "./Fee.sol";
+import { Recorder } from "./Recorder.sol";
 import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import { TinyMerkleTree } from "@fifteenfigures/TinyMerkleTree.sol";
 import { Groth16Verifier } from "./Verifier.sol";
 
-contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
+contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
     using Extractor for bytes;
     using SafeERC20 for IERC20;
 
-    mapping(bytes32 leaf => bool inUse) internal leaves;
     mapping(bytes withdrawalKeyHash => uint256 amountWithdrawn) internal withdrawals;
-    mapping(bytes32 depositLeaf => address depositor) internal deposits;
 
     constructor (bytes32 initLeaf) TinyMerkleTree (initLeaf) {}
 
@@ -28,9 +27,6 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
 
         (, address asset, uint256 amount) = depositKey._extractKeyMetadata();
 
-        leaves[standardizedKey] = true;
-        deposits[standardizedKey] = msg.sender;
-
         uint256 depositAmount = _getMaxWithdrawalOnAmount(amount);
         _takeFee(IERC20(asset), amount);
 
@@ -38,6 +34,7 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
             IERC20(asset).safeTransferFrom(msg.sender, address(this), depositAmount);
 
         _addLeaf(standardizedKey);
+        _recordDeposit(standardizedKey, asset);
         emit DepositAdded(standardizedKey);
     }
     
@@ -47,9 +44,12 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
         uint256[2] calldata pA,     // Proof.
         uint256[2][2] calldata pB,  // Proof.
         uint256[2] calldata pC,     // Proof.
+        uint256 nullifier,
         address recipient,
         uint256 amount
     ) public nonReentrant {
+        nullifier; // @todo Utilize this.
+
         if (!_rootIsInHistory(root)) revert RootNotInHistory(root);
         (, address asset, uint256 amountInKey) = withdrawalKey._extractKeyMetadata();
 
@@ -66,10 +66,6 @@ contract Main is IMain, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
             (bool sent, ) = recipient.call { value: amount}("");
             require(sent);
         } else IERC20(asset).safeTransfer(recipient, amount);
-    }
-
-    function _leafExists(bytes32 leaf) internal view returns (bool) {
-        return leaves[leaf];
     }
 
     function _getMaxWithdrawalOnAmount(uint256 amount) internal pure returns (uint256 maxWithdrawal) {

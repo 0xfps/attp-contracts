@@ -17,6 +17,7 @@ interface IMain {
         uint256[2] calldata pA,     // Proof.
         uint256[2][2] calldata pB,  // Proof.
         uint256[2] calldata pC,     // Proof.
+        uint256 nullifier,
         address receipient,
         uint256 amount
     ) external;
