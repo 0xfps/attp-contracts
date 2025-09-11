@@ -1,0 +1,88 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Recorder",
+  "sourceName": "src/Recorder.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "standardizedKey",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getDepositDelta",
+      "outputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "depositor",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "asset",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amountAfterDeposit",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct Recorder.UserInfo",
+              "name": "info",
+              "type": "tuple"
+            },
+            {
+              "internalType": "uint256",
+              "name": "uniqueDeposits",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "currentDeposit",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct Recorder.DepositInfo",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        }
+      ],
+      "name": "userHasDeposited",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
