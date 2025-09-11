@@ -3,6 +3,7 @@ pragma solidity ^0.8.28;
 
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { IMain } from "./interfaces/IMain.sol";
+import { IVerifier } from "./interfaces/IVerifier.sol";
 
 import { Computer } from "./lib/Computer.sol";
 import { Extractor } from "./lib/Extractor.sol";
@@ -12,16 +13,18 @@ import { NATIVE_TOKEN, Fee } from "./Fee.sol";
 import { Recorder } from "./Recorder.sol";
 import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import { TinyMerkleTree } from "@fifteenfigures/TinyMerkleTree.sol";
-import { Groth16Verifier } from "./Verifier.sol";
 
-contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
+contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard {
     using Extractor for bytes;
     using SafeERC20 for IERC20;
+
+    IVerifier internal immutable VERIFIER;
 
     mapping(uint256 nullifier => bool used) internal nullifierUsed;
     mapping(bytes withdrawalKeyHash => uint256 amountWithdrawn) internal withdrawals;
 
-    constructor (bytes32 initLeaf) TinyMerkleTree (initLeaf) {
+    constructor (address verifier, bytes32 initLeaf) TinyMerkleTree (initLeaf) {
+        VERIFIER = IVerifier(verifier);
         emit DepositAdded(initLeaf);
     }
 
@@ -72,7 +75,7 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         uint256[929] memory publicSignals = Computer._computePublicSignals(root, withdrawalKey);
         publicSignals[928] = nullifier;
 
-        if (!this.verifyProof(pA, pB, pC, publicSignals)) revert ProofNotVerified();
+        if (!VERIFIER.verifyProof(pA, pB, pC, publicSignals)) revert ProofNotVerified();
 
         if (asset == NATIVE_TOKEN) {
             (bool sent, ) = recipient.call { value: amount}("");
