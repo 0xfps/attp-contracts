@@ -69,7 +69,9 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         if ((amountWithdrawn + amount) > maxWithdrawable) revert WithdrawalExceedsMax(amount);
         withdrawals[withdrawalKey] += amount;
 
-        uint256[928] memory publicSignals = Computer._computePublicSignals(root, withdrawalKey);
+        uint256[929] memory publicSignals = Computer._computePublicSignals(root, withdrawalKey);
+        publicSignals[928] = nullifier;
+
         if (!this.verifyProof(pA, pB, pC, publicSignals)) revert ProofNotVerified();
 
         if (asset == NATIVE_TOKEN) {

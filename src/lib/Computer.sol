@@ -9,7 +9,7 @@ library Computer {
     /// @notice Number of bits in a byte.
     uint8 internal constant BIT_LENGTH = 8;
     /// @notice Length of public signals needed by Circom.
-    uint16 internal constant PUBLIC_SIGNALS_LENGTH = 928;
+    uint16 internal constant PUBLIC_SIGNALS_LENGTH = 929;
 
     function _computePublicSignals(
         bytes32 root,
