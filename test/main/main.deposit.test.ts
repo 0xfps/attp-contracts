@@ -80,12 +80,18 @@ describe("Deposit Tests", function () {
         const { depositKey } = generatekeys(mockAsset, amount, secretKey)
         const standardizedKey = standardizeToPoseidon(depositKey)
 
+        const aliceETHBalanceBefore = await ethers.provider.getBalance(aliceAddress)
+
         await mockERC20Token.connect(alice).approve(mainContractAddress, amount)
-        await mainContract.connect(alice).deposit(depositKey, standardizedKey)
+        await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(4e18)})
+
+        const aliceETHBalanceAfter = await ethers.provider.getBalance(aliceAddress)
+        const assumedGas = 5e15
 
         stdKey = standardizedKey
         leaves.push(standardizedKey)
         assert(await mainContract.root() == new MiniMerkleTree(leaves).root)
+        assert((aliceETHBalanceBefore - aliceETHBalanceAfter) <= assumedGas)
     })
 
     it("Make a successful native token deposit.", async function () {
