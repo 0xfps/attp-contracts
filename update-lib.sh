@@ -1,1 +1,1 @@
-forge install 0xfps/tiny-merkle-tree-solidity
+forge update 0xfps/tiny-merkle-tree-solidity

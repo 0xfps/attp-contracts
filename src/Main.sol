@@ -25,22 +25,22 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         emit DepositAdded(initLeaf);
     }
 
+    receive() external payable {}
+
     function deposit(bytes calldata depositKey, bytes32 standardizedKey) public payable {
         if (_leafExists(standardizedKey)) revert KeyAlreadyUsed(standardizedKey);
 
         (, address asset, uint256 amount) = depositKey._extractKeyMetadata();
 
-        uint256 depositAmount = _getMaxWithdrawalOnAmount(amount);
-        _takeFee(IERC20(asset), amount);
-
         if (asset != NATIVE_TOKEN) {
-            IERC20(asset).safeTransferFrom(msg.sender, address(this), depositAmount);
+            IERC20(asset).safeTransferFrom(msg.sender, address(this), amount);
 
             // Refund ETH sent alongside ERC20 token.
             (bool sent, ) = msg.sender.call{ value: msg.value }("");
             require(sent);
         }
 
+        _takeFee(IERC20(asset), amount);
         _addLeaf(standardizedKey);
         _recordDeposit(standardizedKey, asset);
         emit DepositAdded(standardizedKey);
