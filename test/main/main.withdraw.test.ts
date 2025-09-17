@@ -1,13 +1,12 @@
 import { expect } from "chai"
 import { ethers } from "hardhat"
 import { MINT_VALUE, recipient, SECRET_KEY_LENGTH } from "../constants"
-import MiniMerkleTree, { generatekeys, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/mini-merkle-tree"
+import MiniMerkleTree, { generatekeys, getInputObjects, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/mini-merkle-tree"
 import { Main, MockERC20 } from "../../typechain-types"
 import { BigNumberish, Signer, ZeroAddress } from "ethers"
 import assert from "node:assert/strict"
 import Randomstring from "randomstring"
 import path from "node:path"
-import { getInputObjects } from "./utils/get-input-object"
 import { groth16 } from "snarkjs"
 
 const wasmPath = path.join(__dirname, "/artifacts/main.wasm")
@@ -187,7 +186,7 @@ describe("Withdrawal Tests", function () {
 
         const tree = new MiniMerkleTree(leaves)
         root = tree.root
-        const inputObjects = getInputObjects(stdKey, wKey, skey, tree) as any
+        const inputObjects = getInputObjects(wKey, stdKey, skey, tree) as any
 
         const nullifier = BigInt(inputObjects.nullifier)
         usedNullifier = nullifier
@@ -224,7 +223,7 @@ describe("Withdrawal Tests", function () {
 
         const tree = new MiniMerkleTree(leaves)
         root = tree.root
-        const inputObjects = getInputObjects(stdKey, wKey, skey, tree) as any
+        const inputObjects = getInputObjects(wKey, stdKey, skey, tree) as any
 
         const nullifier = BigInt(inputObjects.nullifier)
 
@@ -260,7 +259,7 @@ describe("Withdrawal Tests", function () {
 
         const tree = new MiniMerkleTree(leaves)
         root = tree.root
-        const inputObjects = getInputObjects(stdKey, wKey, skey, tree) as any
+        const inputObjects = getInputObjects(wKey, stdKey, skey, tree) as any
 
         const { proof } = await groth16.fullProve(inputObjects as any, wasmPath, zkeyPath)
         const { pi_a, pi_b, pi_c } = proof
