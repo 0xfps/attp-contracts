@@ -92,12 +92,33 @@ describe("Deposit Tests", function () {
         assert((aliceETHBalanceBefore - aliceETHBalanceAfter) <= assumedGas)
     })
 
+    it("Revert if ETH sent is less than what's configured.", async function () {
+        const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
+        const { depositKey } = generatekeys(ZeroAddress, BigInt(1e18), secretKey)
+        const standardizedKey = standardizeToPoseidon(depositKey)
+
+        await expect(
+            mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(1e18) - 1n })
+        ).to.be.revertedWithCustomError(mainContract, "ETHSentLessThanDeposit")
+    })
+
     it("Make a successful native token deposit.", async function () {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { depositKey } = generatekeys(ZeroAddress, BigInt(1e18), secretKey)
         const standardizedKey = standardizeToPoseidon(depositKey)
 
         await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(1e18) })
+
+        leaves.push(standardizedKey)
+        assert(await mainContract.root() == new MiniMerkleTree(leaves).root)
+    })
+
+    it("Should make a successful native token deposit if ETH sent is greater than what was configured.", async function () {
+        const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
+        const { depositKey } = generatekeys(ZeroAddress, BigInt(1e18), secretKey)
+        const standardizedKey = standardizeToPoseidon(depositKey)
+
+        await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(1e18) + 1n })
 
         leaves.push(standardizedKey)
         assert(await mainContract.root() == new MiniMerkleTree(leaves).root)
@@ -130,7 +151,7 @@ describe("Deposit Tests", function () {
         assert(currentDeposit == getMaxWithdrawalOnAmount(amount))
 
         const fee = calculateFee(amount, 1n)
-        const ethFee = calculateFee(BigInt(1e18), 1n)
+        const ethFee = calculateFee(BigInt(2e18), 1n)
 
         const collectorBalance = await mockERC20Token.balanceOf(collector)
         const sCollectorBalance = await mockERC20Token.balanceOf(sCollector)

@@ -29,13 +29,19 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
 
         (, address asset, uint256 amount) = depositKey._extractKeyMetadata();
 
-        if (asset != NATIVE_TOKEN) {
+        uint256 balance;
+        
+        if (asset == NATIVE_TOKEN) {
+            if (msg.value < amount) revert ETHSentLessThanDeposit(msg.value, amount);
+            balance = msg.value - amount;
+        } else {
             IERC20(asset).safeTransferFrom(msg.sender, address(this), amount);
-
-            // Refund ETH sent alongside ERC20 token.
-            (bool sent, ) = msg.sender.call{ value: msg.value }("");
-            require(sent);
+            balance = msg.value;
         }
+
+        // Refund ETH.
+        (bool sent, ) = msg.sender.call{ value: balance }("");
+        require(sent);
 
         _takeFee(IERC20(asset), amount);
         _addLeaf(standardizedKey);
@@ -75,13 +81,6 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
             (bool sent, ) = recipient.call { value: amount}("");
             require(sent);
         } else IERC20(asset).safeTransfer(recipient, amount);
-    }
-
-    // @todo Remove this function.
-    function getPublicSignals(bytes32 root, bytes memory withdrawalKey, uint256 nullifier) public view returns (uint256[929] memory) {
-        uint256[929] memory publicSignals = Computer._computePublicSignals(root, withdrawalKey);
-        publicSignals[928] = nullifier;
-        return publicSignals;
     }
 
     function _getMaxWithdrawalOnAmount(uint256 amount) internal pure returns (uint256 maxWithdrawal) {

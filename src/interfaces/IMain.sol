@@ -4,6 +4,7 @@ pragma solidity ^0.8.28;
 interface IMain {
     event DepositAdded(bytes32 indexed leaf);
 
+    error ETHSentLessThanDeposit(uint256 ethSent, uint256 deposit);
     error KeyAlreadyUsed(bytes32 leaf);
     error NullifierUsed(uint256 nullifier);
     error ProofNotVerified();
