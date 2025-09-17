@@ -58,6 +58,7 @@ export interface MainInterface extends Interface {
     nameOrSignature:
       | "deposit"
       | "getDepositDelta"
+      | "getPublicSignals"
       | "root"
       | "userHasDeposited"
       | "verifyProof"
@@ -74,6 +75,10 @@ export interface MainInterface extends Interface {
   encodeFunctionData(
     functionFragment: "getDepositDelta",
     values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPublicSignals",
+    values: [BytesLike, BytesLike, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "root", values?: undefined): string;
   encodeFunctionData(
@@ -110,6 +115,10 @@ export interface MainInterface extends Interface {
   decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getDepositDelta",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPublicSignals",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "root", data: BytesLike): Result;
@@ -195,6 +204,12 @@ export interface Main extends BaseContract {
     "view"
   >;
 
+  getPublicSignals: TypedContractMethod<
+    [root: BytesLike, withdrawalKey: BytesLike, nullifier: BigNumberish],
+    [bigint[]],
+    "view"
+  >;
+
   root: TypedContractMethod<[], [string], "view">;
 
   userHasDeposited: TypedContractMethod<
@@ -251,6 +266,13 @@ export interface Main extends BaseContract {
   ): TypedContractMethod<
     [standardizedKey: BytesLike],
     [Recorder.DepositInfoStructOutput],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "getPublicSignals"
+  ): TypedContractMethod<
+    [root: BytesLike, withdrawalKey: BytesLike, nullifier: BigNumberish],
+    [bigint[]],
     "view"
   >;
   getFunction(

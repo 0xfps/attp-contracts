@@ -17,11 +17,23 @@ library Computer {
     ) internal pure returns (uint256[PUBLIC_SIGNALS_LENGTH] memory publicSignals) {
         uint16 index;
 
-        /// @notice It must be concatenated in this order for Circom validity.
-        bytes memory concat = abi.encodePacked(root, withdrawalKey);
+
+        bytes memory rootConcat = abi.encodePacked(root);
         
-        for (uint8 i = 0; i < CONCAT_LENGTH; i++) {
-            uint256[8] memory bits = _computeByteToBitArray(concat[i]);
+        // Reverse root.
+        for (int8 i = 31; i >= 0; i--) {
+            uint256[8] memory bits = _computeByteToBitArray(rootConcat[uint8(i)]);
+            
+            for (uint8 j = 0; j < BIT_LENGTH; j++) {
+                publicSignals[index] = bits[j];
+                index++;
+            }
+        }
+
+        bytes memory withdrawalKeyConcat = abi.encodePacked(withdrawalKey);
+        
+        for (uint8 i = 0; i < 84; i++) {
+            uint256[8] memory bits = _computeByteToBitArray(withdrawalKeyConcat[i]);
             
             for (uint8 j = 0; j < BIT_LENGTH; j++) {
                 publicSignals[index] = bits[j];

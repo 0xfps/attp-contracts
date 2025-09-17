@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import { ethers } from "hardhat"
 import { MINT_VALUE, recipient, SECRET_KEY_LENGTH } from "../constants"
-import MiniMerkleTree, { generatekeys, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/mini-merkle-tree"
+import MiniMerkleTree, { bytesToBits, generatekeys, getRandomNullifier, hashNums, PRIME, standardizeToPoseidon, toNum } from "@fifteenfigures/mini-merkle-tree"
 import { Main, MockERC20 } from "../../typechain-types"
 import { BigNumberish, Signer } from "ethers"
 import assert from "node:assert/strict"
@@ -9,8 +9,9 @@ import Randomstring from "randomstring"
 import path from "node:path"
 import { getInputObjects } from "./utils/get-input-object"
 import { groth16 } from "snarkjs"
-import { writeFileSync } from "node:fs"
+import { readFileSync, writeFileSync } from "node:fs"
 
+const verificationKeyPath = path.join(__dirname, "/artifacts/verification_key.json")
 const wasmPath = path.join(__dirname, "/artifacts/main.wasm")
 const zkeyPath = path.join(__dirname, "/artifacts/main2.zkey")
 const inputs = path.join(__dirname, "/artifacts/input.json")
@@ -178,17 +179,55 @@ describe("Withdrawal Tests", function () {
 
         writeFileSync(inputs, JSON.stringify(inputObjects))
 
-        const { proof } = await groth16.fullProve(inputObjects as any, wasmPath, zkeyPath)
+        const { proof, publicSignals } = await groth16.fullProve(inputObjects as any, wasmPath, zkeyPath)
         const { pi_a, pi_b, pi_c } = proof
 
+        const vKey = JSON.parse(readFileSync(verificationKeyPath) as any);
+
+        console.log(publicSignals)
+        console.log(inputObjects.root)
+        console.log(toNum(publicSignals.slice(256, 928) as any).toString(16))
+
+        
         const nullifier = BigInt(inputObjects.nullifier)
+        const pS = await mainContract.getPublicSignals(root, wKey, nullifier)
+        console.log(pS)
+        const res = await groth16.verify(vKey, pS as any, proof);
+        console.log(res)
+        console.log(toNum(pS.slice(256, 928) as any).toString(16))
+        console.log(toNum(publicSignals.slice(256, 928) as any).toString(16))
+
+        let p = pS.slice(0,).map((k) => Number(k))
+
+        writeFileSync(path.join(__dirname, "artifacts/c-ps.json"), JSON.stringify({
+            circomPS: publicSignals.slice(256, 928)
+        }))
+
+        writeFileSync(path.join(__dirname, "artifacts/s-ps.json"), JSON.stringify({
+            contractPS: p
+        }))
+
+        for (let i = 0; i < 929; i++) {
+            assert(p[i] == Number(publicSignals[i]))
+        }
+
+        console.log(pS[928], publicSignals[928])
+
         console.log({ pi_a, pi_b, pi_c, nullifier })
 
-        const piA = [BigInt(pi_a[0]), BigInt(pi_a[1])] as any
-        const piB = [[BigInt(pi_b[0][0]), BigInt(pi_b[0][1])], [BigInt(pi_b[1][0]), BigInt(pi_b[1][1])]] as any
-        const piC = [BigInt(pi_c[0]), BigInt(pi_c[1])] as any
+        // pA should be [0, 1].
+        const piA = [BigInt(pi_a[0]), BigInt(pi_a[1])] as [BigNumberish, BigNumberish]
+        // pB should be [[1, 0], [1, 0]].
+        // Flipped.
+        const piB = [
+            [BigInt(pi_b[0][1]), BigInt(pi_b[0][0])],
+            [BigInt(pi_b[1][1]), BigInt(pi_b[1][0])]
+        ] as [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]]
+        // pC should be [0, 1].
+        const piC = [BigInt(pi_c[0]), BigInt(pi_c[1])] as [BigNumberish, BigNumberish]
 
         console.log(piA, piB, piC)
+        console.log(BigInt(piA[1]) > PRIME)
 
         await mainContract.withdraw(root, wKey, piA, piB, piC, nullifier, recipient, BigInt(1e10))
     })

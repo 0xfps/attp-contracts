@@ -77,6 +77,13 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         } else IERC20(asset).safeTransfer(recipient, amount);
     }
 
+    // @todo Remove this function.
+    function getPublicSignals(bytes32 root, bytes memory withdrawalKey, uint256 nullifier) public view returns (uint256[929] memory) {
+        uint256[929] memory publicSignals = Computer._computePublicSignals(root, withdrawalKey);
+        publicSignals[928] = nullifier;
+        return publicSignals;
+    }
+
     function _getMaxWithdrawalOnAmount(uint256 amount) internal pure returns (uint256 maxWithdrawal) {
         uint256 fee = _calculateFee(amount);
         maxWithdrawal = amount - fee;
