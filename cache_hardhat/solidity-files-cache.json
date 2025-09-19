@@ -2,14 +2,14 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/interfaces/IERC20.sol": {
-      "lastModificationDate": 1757277041624,
+      "lastModificationDate": 1758287411768,
       "contentHash": "68620db2da7583d9a4919096ac77f577",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC20.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -26,9 +26,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -41,14 +38,14 @@
       "artifacts": []
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/interfaces/IERC165.sol": {
-      "lastModificationDate": 1757277041624,
+      "lastModificationDate": 1758287411768,
       "contentHash": "947853028399b7de34bcc3704ee06e99",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC165.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -65,9 +62,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -80,14 +74,14 @@
       "artifacts": []
     },
     "/Users/fps/Desktop/attp-contracts/src/Fee.sol": {
-      "lastModificationDate": 1757637767136,
+      "lastModificationDate": 1758286593710,
       "contentHash": "1949ee42aa8ae6ec187c25d36d1952d1",
       "sourceName": "src/Fee.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -104,9 +98,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -122,14 +113,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1757277041642,
+      "lastModificationDate": 1758287411784,
       "contentHash": "9261adf6457863de3e9892f51317ec89",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -146,9 +137,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -161,14 +149,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol": {
-      "lastModificationDate": 1757277041787,
+      "lastModificationDate": 1758287743893,
       "contentHash": "1fb9edee1d763745a62d0b1954998792",
       "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -185,9 +173,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -203,14 +188,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/interfaces/IERC1363.sol": {
-      "lastModificationDate": 1757277041623,
+      "lastModificationDate": 1758287411768,
       "contentHash": "a7fd0f05e36b0d0a21c75340c9c639ec",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC1363.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -227,9 +212,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -245,14 +227,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1757277041653,
+      "lastModificationDate": 1758287411793,
       "contentHash": "7074c93b1ea0a122063f26ddd1db1032",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -269,9 +251,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -284,14 +263,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/Recorder.sol": {
-      "lastModificationDate": 1758042349388,
+      "lastModificationDate": 1758286593710,
       "contentHash": "a6f7d290a99bc68af5afd683a62b8e47",
       "sourceName": "src/Recorder.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -308,9 +287,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -326,14 +302,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/Main.sol": {
-      "lastModificationDate": 1758100546352,
+      "lastModificationDate": 1758286593710,
       "contentHash": "b3d1c7d2be6da1bec799f4f386cbd645",
       "sourceName": "src/Main.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -350,9 +326,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -376,14 +349,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/interfaces/IMain.sol": {
-      "lastModificationDate": 1758100161075,
+      "lastModificationDate": 1758286593711,
       "contentHash": "4c0e46a9fb4e953ebab62d849bf7204c",
       "sourceName": "src/interfaces/IMain.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -400,9 +373,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -415,14 +385,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/lib/Computer.sol": {
-      "lastModificationDate": 1758081051284,
+      "lastModificationDate": 1758286593711,
       "contentHash": "5ec781b2eb88375028a45cabbc2ac974",
       "sourceName": "src/lib/Computer.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -439,9 +409,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -454,14 +421,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/lib/Extractor.sol": {
-      "lastModificationDate": 1757282132666,
+      "lastModificationDate": 1758286593711,
       "contentHash": "b61cdb1e12c4c57b756ab5b979f38eab",
       "sourceName": "src/lib/Extractor.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -478,9 +445,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -493,14 +457,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/Verifier.sol": {
-      "lastModificationDate": 1758082362705,
+      "lastModificationDate": 1758286593711,
       "contentHash": "db82b3bc58383a68eaa753a5e191a4bd",
       "sourceName": "src/Verifier.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -517,9 +481,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -532,14 +493,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/tiny-merkle-tree-solidity/src/TinyMerkleTree.sol": {
-      "lastModificationDate": 1758043144430,
-      "contentHash": "6e7447959e829a05d096768edfe51ddd",
+      "lastModificationDate": 1758287451083,
+      "contentHash": "7d55854493039ab4da3afb8f4c0a19aa",
       "sourceName": "@fifteenfigures/TinyMerkleTree.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -556,9 +517,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -573,14 +531,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/utils/ReentrancyGuard.sol": {
-      "lastModificationDate": 1757277041789,
+      "lastModificationDate": 1758287743896,
       "contentHash": "190613e556d509d9e9a0ea43dc5d891d",
       "sourceName": "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -597,9 +555,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -612,14 +567,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/tiny-merkle-tree-solidity/src/lib/PoseidonHash.sol": {
-      "lastModificationDate": 1758043144431,
+      "lastModificationDate": 1758287451085,
       "contentHash": "5ae2e9c8dd4616eb4e9148e0c6477503",
       "sourceName": "@fifteenfigures/lib/PoseidonHash.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -636,9 +591,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -652,14 +604,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-      "lastModificationDate": 1757277041644,
+      "lastModificationDate": 1758287411785,
       "contentHash": "513778b30d2750f5d2b9b19bbcf748a5",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -676,9 +628,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -693,14 +642,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1757277041642,
+      "lastModificationDate": 1758287411783,
       "contentHash": "59dfce11284f2636db261df9b6a18f81",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -717,9 +666,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -737,14 +683,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/utils/Context.sol": {
-      "lastModificationDate": 1757277041648,
+      "lastModificationDate": 1758287411788,
       "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -761,9 +707,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -776,14 +719,14 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol": {
-      "lastModificationDate": 1757277041783,
+      "lastModificationDate": 1758287743887,
       "contentHash": "5041977bbe908de2e6ed0270447f79ad",
       "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 2
           },
           "evmVersion": "paris",
@@ -800,9 +743,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -817,802 +757,6 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/mock/MockERC20.sol": {
-      "lastModificationDate": 1757584036805,
-      "contentHash": "f7320c786bae68e5ab803354f9c39233",
-      "sourceName": "src/mock/MockERC20.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": false
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/ERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.28"
-      ],
-      "artifacts": [
-        "MockERC20"
-      ]
-    },
-    "/Users/fps/Desktop/a/src/Fee.sol": {
-      "lastModificationDate": 1758286593710,
-      "contentHash": "1949ee42aa8ae6ec187c25d36d1952d1",
-      "sourceName": "src/Fee.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.28"
-      ],
-      "artifacts": [
-        "Fee"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1758286593620,
-      "contentHash": "9261adf6457863de3e9892f51317ec89",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.4.16"
-      ],
-      "artifacts": [
-        "IERC20"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol": {
-      "lastModificationDate": 1758286593621,
-      "contentHash": "1fb9edee1d763745a62d0b1954998792",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC20.sol",
-        "../../../interfaces/IERC1363.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "SafeERC20"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/interfaces/IERC1363.sol": {
-      "lastModificationDate": 1758286593606,
-      "contentHash": "a7fd0f05e36b0d0a21c75340c9c639ec",
-      "sourceName": "@openzeppelin/contracts/interfaces/IERC1363.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IERC20.sol",
-        "./IERC165.sol"
-      ],
-      "versionPragmas": [
-        ">=0.6.2"
-      ],
-      "artifacts": [
-        "IERC1363"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/interfaces/IERC20.sol": {
-      "lastModificationDate": 1758286593607,
-      "contentHash": "68620db2da7583d9a4919096ac77f577",
-      "sourceName": "@openzeppelin/contracts/interfaces/IERC20.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../token/ERC20/IERC20.sol"
-      ],
-      "versionPragmas": [
-        ">=0.4.16"
-      ],
-      "artifacts": []
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/interfaces/IERC165.sol": {
-      "lastModificationDate": 1758286593606,
-      "contentHash": "947853028399b7de34bcc3704ee06e99",
-      "sourceName": "@openzeppelin/contracts/interfaces/IERC165.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        ">=0.4.16"
-      ],
-      "artifacts": []
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1758286593628,
-      "contentHash": "7074c93b1ea0a122063f26ddd1db1032",
-      "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.4.16"
-      ],
-      "artifacts": [
-        "IERC165"
-      ]
-    },
-    "/Users/fps/Desktop/a/src/Recorder.sol": {
-      "lastModificationDate": 1758286593710,
-      "contentHash": "a6f7d290a99bc68af5afd683a62b8e47",
-      "sourceName": "src/Recorder.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "./Fee.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.28"
-      ],
-      "artifacts": [
-        "Recorder"
-      ]
-    },
-    "/Users/fps/Desktop/a/src/Main.sol": {
-      "lastModificationDate": 1758286593710,
-      "contentHash": "b3d1c7d2be6da1bec799f4f386cbd645",
-      "sourceName": "src/Main.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "./interfaces/IMain.sol",
-        "./lib/Computer.sol",
-        "./lib/Extractor.sol",
-        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
-        "./Fee.sol",
-        "./Recorder.sol",
-        "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
-        "@fifteenfigures/TinyMerkleTree.sol",
-        "./Verifier.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.28"
-      ],
-      "artifacts": [
-        "Main"
-      ]
-    },
-    "/Users/fps/Desktop/a/src/interfaces/IMain.sol": {
-      "lastModificationDate": 1758286593711,
-      "contentHash": "4c0e46a9fb4e953ebab62d849bf7204c",
-      "sourceName": "src/interfaces/IMain.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.28"
-      ],
-      "artifacts": [
-        "IMain"
-      ]
-    },
-    "/Users/fps/Desktop/a/src/lib/Computer.sol": {
-      "lastModificationDate": 1758286593711,
-      "contentHash": "5ec781b2eb88375028a45cabbc2ac974",
-      "sourceName": "src/lib/Computer.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.28"
-      ],
-      "artifacts": [
-        "Computer"
-      ]
-    },
-    "/Users/fps/Desktop/a/src/lib/Extractor.sol": {
-      "lastModificationDate": 1758286593711,
-      "contentHash": "b61cdb1e12c4c57b756ab5b979f38eab",
-      "sourceName": "src/lib/Extractor.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.28"
-      ],
-      "artifacts": [
-        "Extractor"
-      ]
-    },
-    "/Users/fps/Desktop/a/src/Verifier.sol": {
-      "lastModificationDate": 1758286593711,
-      "contentHash": "db82b3bc58383a68eaa753a5e191a4bd",
-      "sourceName": "src/Verifier.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.0 <0.9.0"
-      ],
-      "artifacts": [
-        "Groth16Verifier"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/utils/ReentrancyGuard.sol": {
-      "lastModificationDate": 1758286593625,
-      "contentHash": "190613e556d509d9e9a0ea43dc5d891d",
-      "sourceName": "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ReentrancyGuard"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/tiny-merkle-tree-solidity/src/TinyMerkleTree.sol": {
-      "lastModificationDate": 1758286593705,
-      "contentHash": "6e7447959e829a05d096768edfe51ddd",
-      "sourceName": "@fifteenfigures/TinyMerkleTree.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./lib/PoseidonHash.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.23"
-      ],
-      "artifacts": [
-        "TinyMerkleTree"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/tiny-merkle-tree-solidity/src/lib/PoseidonHash.sol": {
-      "lastModificationDate": 1758286593705,
-      "contentHash": "5ae2e9c8dd4616eb4e9148e0c6477503",
-      "sourceName": "@fifteenfigures/lib/PoseidonHash.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.7.0"
-      ],
-      "artifacts": [
-        "PoseidonT2",
-        "PoseidonT3"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-      "lastModificationDate": 1758286593621,
-      "contentHash": "513778b30d2750f5d2b9b19bbcf748a5",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC20.sol"
-      ],
-      "versionPragmas": [
-        ">=0.6.2"
-      ],
-      "artifacts": [
-        "IERC20Metadata"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1758286593620,
-      "contentHash": "59dfce11284f2636db261df9b6a18f81",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IERC20.sol",
-        "./extensions/IERC20Metadata.sol",
-        "../../utils/Context.sol",
-        "../../interfaces/draft-IERC6093.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ERC20"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol": {
-      "lastModificationDate": 1758286593609,
-      "contentHash": "5041977bbe908de2e6ed0270447f79ad",
-      "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.8.4"
-      ],
-      "artifacts": [
-        "IERC1155Errors",
-        "IERC20Errors",
-        "IERC721Errors"
-      ]
-    },
-    "/Users/fps/Desktop/a/lib/openzeppelin-contracts/contracts/utils/Context.sol": {
-      "lastModificationDate": 1758286593624,
-      "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
-      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 2
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Context"
-      ]
-    },
-    "/Users/fps/Desktop/a/src/mock/MockERC20.sol": {
       "lastModificationDate": 1758286593711,
       "contentHash": "f7320c786bae68e5ab803354f9c39233",
       "sourceName": "src/mock/MockERC20.sol",

@@ -58,6 +58,7 @@ export interface MainInterface extends Interface {
     nameOrSignature:
       | "deposit"
       | "getDepositDelta"
+      | "getLast32Roots"
       | "root"
       | "userHasDeposited"
       | "verifyProof"
@@ -74,6 +75,10 @@ export interface MainInterface extends Interface {
   encodeFunctionData(
     functionFragment: "getDepositDelta",
     values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getLast32Roots",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "root", values?: undefined): string;
   encodeFunctionData(
@@ -110,6 +115,10 @@ export interface MainInterface extends Interface {
   decodeFunctionResult(functionFragment: "deposit", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getDepositDelta",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getLast32Roots",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "root", data: BytesLike): Result;
@@ -195,6 +204,8 @@ export interface Main extends BaseContract {
     "view"
   >;
 
+  getLast32Roots: TypedContractMethod<[], [string[]], "view">;
+
   root: TypedContractMethod<[], [string], "view">;
 
   userHasDeposited: TypedContractMethod<
@@ -253,6 +264,9 @@ export interface Main extends BaseContract {
     [Recorder.DepositInfoStructOutput],
     "view"
   >;
+  getFunction(
+    nameOrSignature: "getLast32Roots"
+  ): TypedContractMethod<[], [string[]], "view">;
   getFunction(
     nameOrSignature: "root"
   ): TypedContractMethod<[], [string], "view">;
