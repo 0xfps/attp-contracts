@@ -11,12 +11,12 @@ import type {
 const _abi = [
   {
     inputs: [],
-    name: "getLast32Roots",
+    name: "getLast64Roots",
     outputs: [
       {
-        internalType: "bytes32[32]",
+        internalType: "bytes32[64]",
         name: "",
-        type: "bytes32[32]",
+        type: "bytes32[64]",
       },
     ],
     stateMutability: "view",

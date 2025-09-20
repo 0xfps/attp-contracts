@@ -113,7 +113,7 @@ describe("Deposit Tests", function () {
         assert(await mainContract.root() == new MiniMerkleTree(leaves).root)
     })
 
-    it("Should make a successful native token deposit if ETH sent is greater than what was configured.", async function () {
+    it("Should make a successful native token deposit if ETH sent > configured.", async function () {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { depositKey } = generatekeys(ZeroAddress, BigInt(1e18), secretKey)
         const standardizedKey = standardizeToPoseidon(depositKey)
