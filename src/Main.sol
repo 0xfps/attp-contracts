@@ -90,7 +90,7 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
 
     function _rootIsInHistory(bytes32 root) private view returns (bool) {
         for (uint8 i = 0; i < STORED_ROOT_LENGTH; i++) {
-            if (last32Roots[i] == root) return true;
+            if (last64Roots[i] == root) return true;
         }
 
         return false;
