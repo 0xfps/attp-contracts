@@ -18,7 +18,7 @@ abstract contract Fee {
     uint8 private constant SECOND_COLLECTOR_PERCENTAGE = 10; // 10% of 1% fee. Unused, but informational.
 
     // @todo Update addresses.
-    address private constant COLLECTOR = 0xFD5c09eD977f29f2d841351869639A86c500BFEf; // 90% goes to this guy.
+    address private constant COLLECTOR = 0x1181a7eA6E0A4350b067B0BaCdf71440e70ef219; // 90% goes to this guy.
     address private constant SECOND_COLLECTOR = 0x5f6eF81421e331f65aA3D841247927ACb00df77A; // 10% goes to this guy.
 
     function _takeFee(IERC20 token, uint256 amount) internal {

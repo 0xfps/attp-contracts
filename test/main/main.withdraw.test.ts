@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import { ethers } from "hardhat"
 import { MINT_VALUE, recipient, SECRET_KEY_LENGTH } from "../constants"
-import MiniMerkleTree, { generatekeys, getInputObjects, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/mini-merkle-tree"
+import TinyMerkleTree, { generatekeys, getInputObjects, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/tiny-merkle-tree"
 import { Main, MockERC20 } from "../../typechain-types"
 import { BigNumberish, Signer, ZeroAddress } from "ethers"
 import assert from "node:assert/strict"
@@ -81,7 +81,7 @@ describe("Withdrawal Tests", function () {
         skey = secretKey
 
         leaves.push(standardizedKey)
-        assert(await mainContract.root() == new MiniMerkleTree(leaves).root)
+        assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
         assert((aliceETHBalanceBefore - aliceETHBalanceAfter) <= assumedGas)
     })
 
@@ -159,7 +159,7 @@ describe("Withdrawal Tests", function () {
         skey = secretKey
 
         leaves.push(standardizedKey)
-        assert(await mainContract.root() == new MiniMerkleTree(leaves).root)
+        assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
         assert((aliceETHBalanceBefore - aliceETHBalanceAfter) <= assumedGas)
     }
 
@@ -176,7 +176,7 @@ describe("Withdrawal Tests", function () {
         skey = secretKey
 
         leaves.push(standardizedKey)
-        assert(await mainContract.root() == new MiniMerkleTree(leaves).root)
+        assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
     }
 
     it("Should make withdrawal for token.", async function () {
@@ -184,7 +184,7 @@ describe("Withdrawal Tests", function () {
         for (let i = 0; i < randomNumberOfDeposits; i++)
             await deposit()
 
-        const tree = new MiniMerkleTree(leaves)
+        const tree = new TinyMerkleTree(leaves)
         root = tree.root
         const inputObjects = getInputObjects(wKey, stdKey, skey, tree) as any
 
@@ -221,7 +221,7 @@ describe("Withdrawal Tests", function () {
         for (let i = 0; i < randomNumberOfDeposits; i++)
             await depositETH()
 
-        const tree = new MiniMerkleTree(leaves)
+        const tree = new TinyMerkleTree(leaves)
         root = tree.root
         const inputObjects = getInputObjects(wKey, stdKey, skey, tree) as any
 
@@ -257,7 +257,7 @@ describe("Withdrawal Tests", function () {
         for (let i = 0; i < randomNumberOfDeposits; i++)
             await deposit()
 
-        const tree = new MiniMerkleTree(leaves)
+        const tree = new TinyMerkleTree(leaves)
         root = tree.root
         const inputObjects = getInputObjects(wKey, stdKey, skey, tree) as any
 

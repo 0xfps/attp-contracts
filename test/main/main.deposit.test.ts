@@ -1,6 +1,6 @@
 import { ethers } from "hardhat"
 import { collector, MINT_VALUE, sCollector, SECRET_KEY_LENGTH } from "../constants"
-import MiniMerkleTree, { generatekeys, getMaxWithdrawalOnAmount, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/mini-merkle-tree"
+import TinyMerkleTree, { generatekeys, getMaxWithdrawalOnAmount, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/tiny-merkle-tree"
 import { Main, MockERC20 } from "../../typechain-types"
 import Randomstring from "randomstring"
 import { encodeBytes32String, Signer, ZeroAddress } from "ethers"
@@ -88,7 +88,7 @@ describe("Deposit Tests", function () {
 
         stdKey = standardizedKey
         leaves.push(standardizedKey)
-        assert(await mainContract.root() == new MiniMerkleTree(leaves).root)
+        assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
         assert((aliceETHBalanceBefore - aliceETHBalanceAfter) <= assumedGas)
     })
 
@@ -110,7 +110,7 @@ describe("Deposit Tests", function () {
         await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(1e18) })
 
         leaves.push(standardizedKey)
-        assert(await mainContract.root() == new MiniMerkleTree(leaves).root)
+        assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
     })
 
     it("Should make a successful native token deposit if ETH sent > configured.", async function () {
@@ -121,7 +121,7 @@ describe("Deposit Tests", function () {
         await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(1e18) + 1n })
 
         leaves.push(standardizedKey)
-        assert(await mainContract.root() == new MiniMerkleTree(leaves).root)
+        assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
     })
 
     it("Should fail if leaf is repeated.", async function () {
