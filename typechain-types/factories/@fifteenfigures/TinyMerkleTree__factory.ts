@@ -24,6 +24,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "length",
+    outputs: [
+      {
+        internalType: "uint40",
+        name: "",
+        type: "uint40",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "root",
     outputs: [
       {
