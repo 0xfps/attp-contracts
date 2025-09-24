@@ -78,7 +78,7 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         if (!this.verifyProof(pA, pB, pC, publicSignals)) revert ProofNotVerified();
 
         if (asset == NATIVE_TOKEN) {
-            (bool sent, ) = recipient.call { value: amount}("");
+            (bool sent, ) = recipient.call{ value: amount}("");
             require(sent);
         } else IERC20(asset).safeTransfer(recipient, amount);
     }
