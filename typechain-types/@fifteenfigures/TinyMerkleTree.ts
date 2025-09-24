@@ -20,18 +20,22 @@ import type {
 } from "../common";
 
 export interface TinyMerkleTreeInterface extends Interface {
-  getFunction(nameOrSignature: "getLast64Roots" | "root"): FunctionFragment;
+  getFunction(
+    nameOrSignature: "getLast64Roots" | "length" | "root"
+  ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "getLast64Roots",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "length", values?: undefined): string;
   encodeFunctionData(functionFragment: "root", values?: undefined): string;
 
   decodeFunctionResult(
     functionFragment: "getLast64Roots",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "length", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "root", data: BytesLike): Result;
 }
 
@@ -80,6 +84,8 @@ export interface TinyMerkleTree extends BaseContract {
 
   getLast64Roots: TypedContractMethod<[], [string[]], "view">;
 
+  length: TypedContractMethod<[], [bigint], "view">;
+
   root: TypedContractMethod<[], [string], "view">;
 
   getFunction<T extends ContractMethod = ContractMethod>(
@@ -89,6 +95,9 @@ export interface TinyMerkleTree extends BaseContract {
   getFunction(
     nameOrSignature: "getLast64Roots"
   ): TypedContractMethod<[], [string[]], "view">;
+  getFunction(
+    nameOrSignature: "length"
+  ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "root"
   ): TypedContractMethod<[], [string], "view">;

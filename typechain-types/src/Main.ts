@@ -59,6 +59,7 @@ export interface MainInterface extends Interface {
       | "deposit"
       | "getDepositDelta"
       | "getLast64Roots"
+      | "length"
       | "root"
       | "userHasDeposited"
       | "verifyProof"
@@ -80,6 +81,7 @@ export interface MainInterface extends Interface {
     functionFragment: "getLast64Roots",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "length", values?: undefined): string;
   encodeFunctionData(functionFragment: "root", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "userHasDeposited",
@@ -121,6 +123,7 @@ export interface MainInterface extends Interface {
     functionFragment: "getLast64Roots",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "length", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "root", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "userHasDeposited",
@@ -206,6 +209,8 @@ export interface Main extends BaseContract {
 
   getLast64Roots: TypedContractMethod<[], [string[]], "view">;
 
+  length: TypedContractMethod<[], [bigint], "view">;
+
   root: TypedContractMethod<[], [string], "view">;
 
   userHasDeposited: TypedContractMethod<
@@ -267,6 +272,9 @@ export interface Main extends BaseContract {
   getFunction(
     nameOrSignature: "getLast64Roots"
   ): TypedContractMethod<[], [string[]], "view">;
+  getFunction(
+    nameOrSignature: "length"
+  ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "root"
   ): TypedContractMethod<[], [string], "view">;
