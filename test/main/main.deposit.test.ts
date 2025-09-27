@@ -26,7 +26,7 @@ describe("Deposit Tests", function () {
         alice = (await ethers.getSigners())[0]
         aliceAddress = await alice.getAddress()
 
-        mockERC20Token = await ethers.deployContract("MockERC20")
+        mockERC20Token = await ethers.deployContract("MockERC20", ["Mock Token", "Mock"])
         await mockERC20Token.mint(alice, MINT_VALUE)
         mockAsset = await mockERC20Token.getAddress()
 
@@ -81,7 +81,7 @@ describe("Deposit Tests", function () {
         const aliceETHBalanceBefore = await ethers.provider.getBalance(aliceAddress)
 
         await mockERC20Token.connect(alice).approve(mainContractAddress, amount)
-        await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(4e18)})
+        await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(4e18) })
 
         const aliceETHBalanceAfter = await ethers.provider.getBalance(aliceAddress)
         const assumedGas = 5e15

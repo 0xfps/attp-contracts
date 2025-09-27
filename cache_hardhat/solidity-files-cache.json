@@ -10,7 +10,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -46,7 +46,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -82,7 +82,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -121,7 +121,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -149,7 +149,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol": {
-      "lastModificationDate": 1758287743893,
+      "lastModificationDate": 1758728625461,
       "contentHash": "1fb9edee1d763745a62d0b1954998792",
       "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
       "solcConfig": {
@@ -157,7 +157,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -196,7 +196,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -235,7 +235,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -271,7 +271,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -310,7 +310,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -357,7 +357,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -393,7 +393,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -429,7 +429,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -457,15 +457,15 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/Verifier.sol": {
-      "lastModificationDate": 1758286593711,
-      "contentHash": "db82b3bc58383a68eaa753a5e191a4bd",
+      "lastModificationDate": 1758970876519,
+      "contentHash": "85f53252ec3b1476712d089b45e448b0",
       "sourceName": "src/Verifier.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -501,7 +501,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -531,7 +531,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/utils/ReentrancyGuard.sol": {
-      "lastModificationDate": 1758287743896,
+      "lastModificationDate": 1758728625465,
       "contentHash": "190613e556d509d9e9a0ea43dc5d891d",
       "sourceName": "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
       "solcConfig": {
@@ -539,7 +539,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -567,7 +567,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/tiny-merkle-tree-solidity/src/lib/PoseidonHash.sol": {
-      "lastModificationDate": 1758287451085,
+      "lastModificationDate": 1758728647766,
       "contentHash": "5ae2e9c8dd4616eb4e9148e0c6477503",
       "sourceName": "@fifteenfigures/lib/PoseidonHash.sol",
       "solcConfig": {
@@ -575,7 +575,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -612,7 +612,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -650,7 +650,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -691,7 +691,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -719,7 +719,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol": {
-      "lastModificationDate": 1758287743887,
+      "lastModificationDate": 1758728625454,
       "contentHash": "5041977bbe908de2e6ed0270447f79ad",
       "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
       "solcConfig": {
@@ -727,7 +727,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -757,15 +757,15 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/mock/MockERC20.sol": {
-      "lastModificationDate": 1758286593711,
-      "contentHash": "f7320c786bae68e5ab803354f9c39233",
+      "lastModificationDate": 1758758814837,
+      "contentHash": "93faf79067b1af260bedbef509be19a3",
       "sourceName": "src/mock/MockERC20.sol",
       "solcConfig": {
         "version": "0.8.28",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 2
+            "runs": 1
           },
           "evmVersion": "paris",
           "outputSelection": {

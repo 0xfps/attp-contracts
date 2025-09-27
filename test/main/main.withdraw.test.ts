@@ -44,7 +44,7 @@ describe("Withdrawal Tests", function () {
         alice = (await ethers.getSigners())[0]
         aliceAddress = await alice.getAddress()
 
-        mockERC20Token = await ethers.deployContract("MockERC20")
+        mockERC20Token = await ethers.deployContract("MockERC20", ["Mock Token", "Mock"])
         await mockERC20Token.mint(alice, MINT_VALUE)
         mockAsset = await mockERC20Token.getAddress()
 
@@ -288,5 +288,6 @@ describe("Withdrawal Tests", function () {
 })
 
 function getRandomNumber() {
+    // return 1
     return Math.floor(Math.random() * 100)
 }
