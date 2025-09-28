@@ -3,31 +3,35 @@ pragma solidity ^0.8.28;
 
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { IMain } from "./interfaces/IMain.sol";
+import { IVerifier } from "./interfaces/IVerifier.sol";
 
-import { Computer } from "./lib/Computer.sol";
 import { Extractor } from "./lib/Extractor.sol";
+import { PoseidonT4 } from "./lib/PoseidonT4.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { NATIVE_TOKEN, Fee } from "./Fee.sol";
 import { Recorder } from "./Recorder.sol";
 import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import { TinyMerkleTree } from "@fifteenfigures/TinyMerkleTree.sol";
-import { Groth16Verifier } from "./Verifier.sol";
 
-contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
+contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard {
     using Extractor for bytes;
     using SafeERC20 for IERC20;
 
-    constructor (bytes32 initLeaf) TinyMerkleTree (initLeaf) {
+    IVerifier internal verifier;
+
+    constructor (bytes32 initLeaf, address _verifier) TinyMerkleTree (initLeaf) {
+        verifier = IVerifier(_verifier);
         emit DepositAdded(initLeaf);
     }
 
     receive() external payable {}
 
-    function deposit(bytes calldata depositKey, bytes32 standardizedKey) public payable {
-        if (_leafExists(standardizedKey)) revert KeyAlreadyUsed(standardizedKey);
-
-        (, address asset, uint256 amount) = depositKey._extractKeyMetadata();
+    function deposit(bytes calldata depositKey) public payable {
+        (bytes32 keyHash, address asset, uint256 amount) = depositKey._extractKeyMetadata();
+        bytes32 leaf = bytes32(PoseidonT4.hash([uint256(keyHash), uint256(uint160(asset)), amount]));
+        
+        if (_leafExists(leaf)) revert KeyAlreadyUsed(leaf);
 
         uint256 balance;
         
@@ -44,9 +48,9 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         require(sent);
 
         _takeFee(IERC20(asset), amount);
-        _addLeaf(standardizedKey);
-        _recordDeposit(standardizedKey, asset);
-        emit DepositAdded(standardizedKey);
+        _addLeaf(leaf);
+        _recordDeposit(leaf, asset);
+        emit DepositAdded(leaf);
     }
     
     function withdraw(
@@ -64,7 +68,7 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         if (nullifierUsed[nullifier]) revert NullifierUsed(nullifier);
         nullifierUsed[nullifier] = true;
 
-        (, address asset, uint256 amountInKey) = withdrawalKey._extractKeyMetadata();
+        (bytes32 keyHash, address asset, uint256 amountInKey) = withdrawalKey._extractKeyMetadata();
 
         uint256 maxWithdrawable = _getMaxWithdrawalOnAmount(amountInKey);
         uint256 amountWithdrawn = withdrawals[withdrawalKey];
@@ -72,10 +76,14 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         if ((amountWithdrawn + amount) > maxWithdrawable) revert WithdrawalExceedsMax(amount);
         withdrawals[withdrawalKey] += amount;
 
-        uint256[929] memory publicSignals = Computer._computePublicSignals(root, withdrawalKey);
-        publicSignals[928] = nullifier;
+        uint256[5] memory publicSignals;
+        publicSignals[0] = uint256(root);
+        publicSignals[1] = uint256(keyHash);
+        publicSignals[2] = uint256(uint160(asset));
+        publicSignals[3] = uint256(amountInKey);
+        publicSignals[4] = nullifier;
 
-        if (!this.verifyProof(pA, pB, pC, publicSignals)) revert ProofNotVerified();
+        if (!verifier.verifyProof(pA, pB, pC, publicSignals)) revert ProofNotVerified();
 
         if (asset == NATIVE_TOKEN) {
             (bool sent, ) = recipient.call{ value: amount}("");

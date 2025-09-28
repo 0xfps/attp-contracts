@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { IMain__factory } from "./IMain__factory";
+export { IVerifier__factory } from "./IVerifier__factory";

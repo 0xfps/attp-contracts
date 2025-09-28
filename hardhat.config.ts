@@ -26,7 +26,7 @@ const config: HardhatUserConfig = {
   },
   networks: {
     hardhat: {
-      allowUnlimitedContractSize: true
+      // allowUnlimitedContractSize: true
     },
     arbitrumSepolia: {
       chainId: 421614,

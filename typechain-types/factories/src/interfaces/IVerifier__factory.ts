@@ -27,9 +27,9 @@ const _abi = [
         type: "uint256[2]",
       },
       {
-        internalType: "uint256[929]",
+        internalType: "uint256[5]",
         name: "_pubSignals",
-        type: "uint256[929]",
+        type: "uint256[5]",
       },
     ],
     name: "verifyProof",
