@@ -149,7 +149,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol": {
-      "lastModificationDate": 1758728625461,
+      "lastModificationDate": 1759092053265,
       "contentHash": "1fb9edee1d763745a62d0b1954998792",
       "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
       "solcConfig": {
@@ -263,7 +263,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/Recorder.sol": {
-      "lastModificationDate": 1758349679781,
+      "lastModificationDate": 1759090776297,
       "contentHash": "a6f7d290a99bc68af5afd683a62b8e47",
       "sourceName": "src/Recorder.sol",
       "solcConfig": {
@@ -302,8 +302,8 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/Main.sol": {
-      "lastModificationDate": 1758728549219,
-      "contentHash": "c9266abab705cad940b63831904a8f90",
+      "lastModificationDate": 1759090644179,
+      "contentHash": "1c3f0d0a3440d5b9815c634f60ebbac6",
       "sourceName": "src/Main.sol",
       "solcConfig": {
         "version": "0.8.28",
@@ -332,14 +332,14 @@
       "imports": [
         "@openzeppelin/contracts/token/ERC20/IERC20.sol",
         "./interfaces/IMain.sol",
-        "./lib/Computer.sol",
+        "./interfaces/IVerifier.sol",
         "./lib/Extractor.sol",
+        "./lib/PoseidonT4.sol",
         "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
         "./Fee.sol",
         "./Recorder.sol",
         "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
-        "@fifteenfigures/TinyMerkleTree.sol",
-        "./Verifier.sol"
+        "@fifteenfigures/TinyMerkleTree.sol"
       ],
       "versionPragmas": [
         "^0.8.28"
@@ -349,8 +349,8 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/interfaces/IMain.sol": {
-      "lastModificationDate": 1758286593711,
-      "contentHash": "4c0e46a9fb4e953ebab62d849bf7204c",
+      "lastModificationDate": 1759086887879,
+      "contentHash": "b26b305040a5ee3e73f22e60ca5b7766",
       "sourceName": "src/interfaces/IMain.sol",
       "solcConfig": {
         "version": "0.8.28",
@@ -382,42 +382,6 @@
       ],
       "artifacts": [
         "IMain"
-      ]
-    },
-    "/Users/fps/Desktop/attp-contracts/src/lib/Computer.sol": {
-      "lastModificationDate": 1758286593711,
-      "contentHash": "5ec781b2eb88375028a45cabbc2ac974",
-      "sourceName": "src/lib/Computer.sol",
-      "solcConfig": {
-        "version": "0.8.28",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.28"
-      ],
-      "artifacts": [
-        "Computer"
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/lib/Extractor.sol": {
@@ -457,8 +421,8 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/src/Verifier.sol": {
-      "lastModificationDate": 1758970876519,
-      "contentHash": "85f53252ec3b1476712d089b45e448b0",
+      "lastModificationDate": 1759085001234,
+      "contentHash": "37e542e03cb8d49a60dd6982e1af8a13",
       "sourceName": "src/Verifier.sol",
       "solcConfig": {
         "version": "0.8.28",
@@ -493,7 +457,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/tiny-merkle-tree-solidity/src/TinyMerkleTree.sol": {
-      "lastModificationDate": 1758728647764,
+      "lastModificationDate": 1759092099631,
       "contentHash": "ea98ebc0d81e6106af441b7f842ced8f",
       "sourceName": "@fifteenfigures/TinyMerkleTree.sol",
       "solcConfig": {
@@ -531,7 +495,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/utils/ReentrancyGuard.sol": {
-      "lastModificationDate": 1758728625465,
+      "lastModificationDate": 1759092053268,
       "contentHash": "190613e556d509d9e9a0ea43dc5d891d",
       "sourceName": "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
       "solcConfig": {
@@ -567,7 +531,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/tiny-merkle-tree-solidity/src/lib/PoseidonHash.sol": {
-      "lastModificationDate": 1758728647766,
+      "lastModificationDate": 1759092099633,
       "contentHash": "5ae2e9c8dd4616eb4e9148e0c6477503",
       "sourceName": "@fifteenfigures/lib/PoseidonHash.sol",
       "solcConfig": {
@@ -642,7 +606,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1758287411783,
+      "lastModificationDate": 1759092053264,
       "contentHash": "59dfce11284f2636db261df9b6a18f81",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
@@ -719,7 +683,7 @@
       ]
     },
     "/Users/fps/Desktop/attp-contracts/lib/openzeppelin-contracts/contracts/interfaces/draft-IERC6093.sol": {
-      "lastModificationDate": 1758728625454,
+      "lastModificationDate": 1759092053258,
       "contentHash": "5041977bbe908de2e6ed0270447f79ad",
       "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
       "solcConfig": {
@@ -792,6 +756,78 @@
       ],
       "artifacts": [
         "MockERC20"
+      ]
+    },
+    "/Users/fps/Desktop/attp-contracts/src/interfaces/IVerifier.sol": {
+      "lastModificationDate": 1759085835445,
+      "contentHash": "487a5a87f4c2187d2e8593f42ff38d7c",
+      "sourceName": "src/interfaces/IVerifier.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.28"
+      ],
+      "artifacts": [
+        "IVerifier"
+      ]
+    },
+    "/Users/fps/Desktop/attp-contracts/src/lib/PoseidonT4.sol": {
+      "lastModificationDate": 1759086737097,
+      "contentHash": "127b5cd515fe51c04bf3897bbd4e2673",
+      "sourceName": "src/lib/PoseidonT4.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0"
+      ],
+      "artifacts": [
+        "PoseidonT4"
       ]
     }
   }

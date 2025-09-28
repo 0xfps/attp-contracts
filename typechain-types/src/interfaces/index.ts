@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { IMain } from "./IMain";
+export type { IVerifier } from "./IVerifier";

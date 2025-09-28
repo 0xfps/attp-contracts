@@ -1,13 +1,15 @@
 import { expect } from "chai"
 import { ethers } from "hardhat"
 import { MINT_VALUE, recipient, SECRET_KEY_LENGTH } from "../constants"
-import TinyMerkleTree, { generatekeys, getInputObjects, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/tiny-merkle-tree"
+import TinyMerkleTree, { CircomInputObject, generatekeys, getInputObjects, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/tiny-merkle-tree"
 import { Main, MockERC20 } from "../../typechain-types"
 import { BigNumberish, Signer, ZeroAddress } from "ethers"
 import assert from "node:assert/strict"
 import Randomstring from "randomstring"
 import path from "node:path"
 import { groth16 } from "snarkjs"
+import { writeFileSync } from "node:fs"
+import { getLeafFromKey } from "@fifteenfigures/tiny-merkle-tree"
 
 const wasmPath = path.join(__dirname, "/artifacts/main.wasm")
 const zkeyPath = path.join(__dirname, "/artifacts/main2.zkey")
@@ -48,16 +50,21 @@ describe("Withdrawal Tests", function () {
         await mockERC20Token.mint(alice, MINT_VALUE)
         mockAsset = await mockERC20Token.getAddress()
 
+        const verifier = await ethers.deployContract("Groth16Verifier");
+        const verifierAddress = await verifier.getAddress()
+
         const PoseidonT2 = await (await ethers.deployContract("PoseidonT2")).getAddress()
         const PoseidonT3 = await (await ethers.deployContract("PoseidonT3")).getAddress()
+        const PoseidonT4 = await (await ethers.deployContract("PoseidonT4")).getAddress()
 
         const initLeaf = hashNums([getRandomNullifier()])
         leaves.push(initLeaf)
 
-        mainContract = await ethers.deployContract("Main", [initLeaf], {
+        mainContract = await ethers.deployContract("Main", [initLeaf, verifierAddress], {
             libraries: {
                 PoseidonT2,
-                PoseidonT3
+                PoseidonT3,
+                PoseidonT4
             }
         })
 
@@ -65,12 +72,12 @@ describe("Withdrawal Tests", function () {
 
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { withdrawalKey, depositKey } = generatekeys(mockAsset, amount, secretKey)
-        const standardizedKey = standardizeToPoseidon(depositKey)
+        const standardizedKey = getLeafFromKey(depositKey)
 
         const aliceETHBalanceBefore = await ethers.provider.getBalance(aliceAddress)
 
         await mockERC20Token.connect(alice).approve(mainContractAddress, amount)
-        await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(4e18) })
+        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(4e18) })
 
         const aliceETHBalanceAfter = await ethers.provider.getBalance(aliceAddress)
         const assumedGas = 5e15
@@ -143,12 +150,12 @@ describe("Withdrawal Tests", function () {
     async function deposit() {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { withdrawalKey, depositKey } = generatekeys(mockAsset, BigInt(1e17), secretKey)
-        const standardizedKey = standardizeToPoseidon(depositKey)
+        const standardizedKey = getLeafFromKey(depositKey)
 
         const aliceETHBalanceBefore = await ethers.provider.getBalance(aliceAddress)
 
         await mockERC20Token.connect(alice).approve(mainContractAddress, amount)
-        await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(4e18) })
+        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(4e18) })
 
         const aliceETHBalanceAfter = await ethers.provider.getBalance(aliceAddress)
         const assumedGas = 5e15
@@ -166,9 +173,9 @@ describe("Withdrawal Tests", function () {
     async function depositETH() {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { withdrawalKey, depositKey } = generatekeys(ZeroAddress, BigInt(1e15), secretKey)
-        const standardizedKey = standardizeToPoseidon(depositKey)
+        const standardizedKey = getLeafFromKey(depositKey)
 
-        await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(1e15) })
+        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(1e15) })
 
         stdKey = standardizedKey
         wKey = withdrawalKey
@@ -186,7 +193,20 @@ describe("Withdrawal Tests", function () {
 
         const tree = new TinyMerkleTree(leaves)
         root = tree.root
-        const inputObjects = getInputObjects(wKey, stdKey, skey, tree) as any
+        const inputObjects: CircomInputObject = getInputObjects(wKey, stdKey, skey, tree) as any
+
+        // writeFileSync("input3.json", JSON.stringify({
+        //     validBits: inputObjects.validBits,
+        //     proof: inputObjects.proof,
+        //     root: inputObjects.root.toString(),
+        //     directions: inputObjects.directions,
+        //     withdrawalKeyNumPart1: inputObjects.withdrawalKeyNumPart1.toString(),
+        //     withdrawalKeyNumPart2: inputObjects.withdrawalKeyNumPart2.toString(),
+        //     withdrawalKeyNumPart3: inputObjects.withdrawalKeyNumPart3.toString(),
+        //     nuullifier: inputObjects.nullifier.toString(),
+        //     nullifierHash: inputObjects.nullifierHash,
+        //     secretKey: inputObjects.secretKey.toString()
+        // }))
 
         const nullifier = BigInt(inputObjects.nullifier)
         usedNullifier = nullifier
@@ -288,6 +308,6 @@ describe("Withdrawal Tests", function () {
 })
 
 function getRandomNumber() {
-    // return 1
-    return Math.floor(Math.random() * 100)
+    return 1
+    // return Math.floor(Math.random() * 100)
 }

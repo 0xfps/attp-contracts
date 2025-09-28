@@ -62,17 +62,13 @@ export interface MainInterface extends Interface {
       | "length"
       | "root"
       | "userHasDeposited"
-      | "verifyProof"
       | "withdraw"
       | "withdrawals"
   ): FunctionFragment;
 
   getEvent(nameOrSignatureOrTopic: "DepositAdded"): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "deposit",
-    values: [BytesLike, BytesLike]
-  ): string;
+  encodeFunctionData(functionFragment: "deposit", values: [BytesLike]): string;
   encodeFunctionData(
     functionFragment: "getDepositDelta",
     values: [BytesLike]
@@ -86,15 +82,6 @@ export interface MainInterface extends Interface {
   encodeFunctionData(
     functionFragment: "userHasDeposited",
     values: [AddressLike, AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "verifyProof",
-    values: [
-      [BigNumberish, BigNumberish],
-      [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      [BigNumberish, BigNumberish],
-      BigNumberish[]
-    ]
   ): string;
   encodeFunctionData(
     functionFragment: "withdraw",
@@ -127,10 +114,6 @@ export interface MainInterface extends Interface {
   decodeFunctionResult(functionFragment: "root", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "userHasDeposited",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "verifyProof",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
@@ -195,11 +178,7 @@ export interface Main extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
-  deposit: TypedContractMethod<
-    [depositKey: BytesLike, standardizedKey: BytesLike],
-    [void],
-    "payable"
-  >;
+  deposit: TypedContractMethod<[depositKey: BytesLike], [void], "payable">;
 
   getDepositDelta: TypedContractMethod<
     [standardizedKey: BytesLike],
@@ -215,17 +194,6 @@ export interface Main extends BaseContract {
 
   userHasDeposited: TypedContractMethod<
     [user: AddressLike, asset: AddressLike],
-    [boolean],
-    "view"
-  >;
-
-  verifyProof: TypedContractMethod<
-    [
-      _pA: [BigNumberish, BigNumberish],
-      _pB: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      _pC: [BigNumberish, BigNumberish],
-      _pubSignals: BigNumberish[]
-    ],
     [boolean],
     "view"
   >;
@@ -257,11 +225,7 @@ export interface Main extends BaseContract {
 
   getFunction(
     nameOrSignature: "deposit"
-  ): TypedContractMethod<
-    [depositKey: BytesLike, standardizedKey: BytesLike],
-    [void],
-    "payable"
-  >;
+  ): TypedContractMethod<[depositKey: BytesLike], [void], "payable">;
   getFunction(
     nameOrSignature: "getDepositDelta"
   ): TypedContractMethod<
@@ -282,18 +246,6 @@ export interface Main extends BaseContract {
     nameOrSignature: "userHasDeposited"
   ): TypedContractMethod<
     [user: AddressLike, asset: AddressLike],
-    [boolean],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "verifyProof"
-  ): TypedContractMethod<
-    [
-      _pA: [BigNumberish, BigNumberish],
-      _pB: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      _pC: [BigNumberish, BigNumberish],
-      _pubSignals: BigNumberish[]
-    ],
     [boolean],
     "view"
   >;

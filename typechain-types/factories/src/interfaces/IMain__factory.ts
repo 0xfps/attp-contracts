@@ -91,11 +91,6 @@ const _abi = [
         name: "depositKey",
         type: "bytes",
       },
-      {
-        internalType: "bytes32",
-        name: "standardizedKey",
-        type: "bytes32",
-      },
     ],
     name: "deposit",
     outputs: [],

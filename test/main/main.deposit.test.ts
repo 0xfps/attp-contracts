@@ -6,6 +6,7 @@ import Randomstring from "randomstring"
 import { encodeBytes32String, Signer, ZeroAddress } from "ethers"
 import assert from "node:assert/strict"
 import { expect } from "chai"
+import { getLeafFromKey } from "@fifteenfigures/tiny-merkle-tree"
 
 describe("Deposit Tests", function () {
     let mainContract: Main
@@ -21,6 +22,7 @@ describe("Deposit Tests", function () {
     let aliceAddress: string
 
     let stdKey: string;
+    let depKey: string;
 
     before(async function () {
         alice = (await ethers.getSigners())[0]
@@ -30,16 +32,21 @@ describe("Deposit Tests", function () {
         await mockERC20Token.mint(alice, MINT_VALUE)
         mockAsset = await mockERC20Token.getAddress()
 
+        const verifier = await ethers.deployContract("Groth16Verifier");
+        const verifierAddress = await verifier.getAddress()
+
         const PoseidonT2 = await (await ethers.deployContract("PoseidonT2")).getAddress()
         const PoseidonT3 = await (await ethers.deployContract("PoseidonT3")).getAddress()
+        const PoseidonT4 = await (await ethers.deployContract("PoseidonT4")).getAddress()
 
         const initLeaf = hashNums([getRandomNullifier()])
         leaves.push(initLeaf)
 
-        mainContract = await ethers.deployContract("Main", [initLeaf], {
+        mainContract = await ethers.deployContract("Main", [initLeaf, verifierAddress], {
             libraries: {
                 PoseidonT2,
-                PoseidonT3
+                PoseidonT3,
+                PoseidonT4
             }
         })
 
@@ -76,16 +83,17 @@ describe("Deposit Tests", function () {
     it("Make a successful token deposit.", async function () {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { depositKey } = generatekeys(mockAsset, amount, secretKey)
-        const standardizedKey = standardizeToPoseidon(depositKey)
+        const standardizedKey = getLeafFromKey(depositKey)
 
         const aliceETHBalanceBefore = await ethers.provider.getBalance(aliceAddress)
 
         await mockERC20Token.connect(alice).approve(mainContractAddress, amount)
-        await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(4e18) })
+        await mainContract.connect(alice).deposit(depositKey,  { value: BigInt(4e18) })
 
         const aliceETHBalanceAfter = await ethers.provider.getBalance(aliceAddress)
         const assumedGas = 5e15
 
+        depKey = depositKey;
         stdKey = standardizedKey
         leaves.push(standardizedKey)
         assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
@@ -95,19 +103,18 @@ describe("Deposit Tests", function () {
     it("Revert if ETH sent is less than what's configured.", async function () {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { depositKey } = generatekeys(ZeroAddress, BigInt(1e18), secretKey)
-        const standardizedKey = standardizeToPoseidon(depositKey)
 
         await expect(
-            mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(1e18) - 1n })
+            mainContract.connect(alice).deposit(depositKey, { value: BigInt(1e18) - 1n })
         ).to.be.revertedWithCustomError(mainContract, "ETHSentLessThanDeposit")
     })
 
     it("Make a successful native token deposit.", async function () {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { depositKey } = generatekeys(ZeroAddress, BigInt(1e18), secretKey)
-        const standardizedKey = standardizeToPoseidon(depositKey)
+        const standardizedKey = getLeafFromKey(depositKey)
 
-        await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(1e18) })
+        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(1e18) })
 
         leaves.push(standardizedKey)
         assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
@@ -116,23 +123,21 @@ describe("Deposit Tests", function () {
     it("Should make a successful native token deposit if ETH sent > configured.", async function () {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { depositKey } = generatekeys(ZeroAddress, BigInt(1e18), secretKey)
-        const standardizedKey = standardizeToPoseidon(depositKey)
+        const stdKey = getLeafFromKey(depositKey)
 
-        await mainContract.connect(alice).deposit(depositKey, standardizedKey, { value: BigInt(1e18) + 1n })
+        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(1e18) + 1n })
 
-        leaves.push(standardizedKey)
+        leaves.push(stdKey)
         assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
     })
 
     it("Should fail if leaf is repeated.", async function () {
-        const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
-        const { depositKey } = generatekeys(mockAsset, amount, secretKey)
-
         await mockERC20Token.connect(alice).approve(mainContractAddress, amount)
+        
         await expect(
             mainContract
                 .connect(alice)
-                .deposit(depositKey, stdKey)
+                .deposit(depKey)
         ).to.be.revertedWithCustomError(mainContract, "KeyAlreadyUsed")
     })
 
@@ -143,7 +148,7 @@ describe("Deposit Tests", function () {
         const standardizedKeyDelta = await mainContract.getDepositDelta(stdKey)
         const { depositor, asset, amountAfterDeposit } = standardizedKeyDelta.info
         const { uniqueDeposits, currentDeposit } = standardizedKeyDelta
-
+        
         assert(depositor == aliceAddress)
         assert(asset == mockAsset)
         assert(amountAfterDeposit == getMaxWithdrawalOnAmount(amount))

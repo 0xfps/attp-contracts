@@ -36,6 +36,10 @@ export type { ReentrancyGuard } from "./@openzeppelin/contracts/utils/Reentrancy
 export { ReentrancyGuard__factory } from "./factories/@openzeppelin/contracts/utils/ReentrancyGuard__factory";
 export type { IMain } from "./src/interfaces/IMain";
 export { IMain__factory } from "./factories/src/interfaces/IMain__factory";
+export type { IVerifier } from "./src/interfaces/IVerifier";
+export { IVerifier__factory } from "./factories/src/interfaces/IVerifier__factory";
+export type { PoseidonT4 } from "./src/lib/PoseidonT4";
+export { PoseidonT4__factory } from "./factories/src/lib/PoseidonT4__factory";
 export type { Main } from "./src/Main";
 export { Main__factory } from "./factories/src/Main__factory";
 export type { MockERC20 } from "./src/mock/MockERC20";

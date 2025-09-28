@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>30/30</span>
+        <span class='fraction'>31/31</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">87.5% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>34/34</span>
+        <span class='fraction'>40/40</span>
       </div>
     </div>
   </div>
@@ -140,7 +140,17 @@
 95
 96
 97
-98</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+98
+99
+100
+101
+102
+103
+104
+105
+106</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,33 +172,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">156×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">155×</span>
+<span class="cline-any cline-yes">9×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">155×</span>
+<span class="cline-any cline-yes">8×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">155×</span>
-<span class="cline-any cline-yes">20×</span>
-<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">135×</span>
-<span class="cline-any cline-yes">135×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">154×</span>
-<span class="cline-any cline-yes">154×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">154×</span>
-<span class="cline-any cline-yes">154×</span>
-<span class="cline-any cline-yes">154×</span>
-<span class="cline-any cline-yes">154×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -216,6 +228,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -232,7 +248,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6×</span>
-<span class="cline-any cline-yes">92×</span>
+<span class="cline-any cline-yes">75×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
@@ -242,31 +258,35 @@ pragma solidity ^0.8.28;
 &nbsp;
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { IMain } from "./interfaces/IMain.sol";
+import { IVerifier } from "./interfaces/IVerifier.sol";
 &nbsp;
-import { Computer } from "./lib/Computer.sol";
 import { Extractor } from "./lib/Extractor.sol";
+import { PoseidonT4 } from "./lib/PoseidonT4.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 &nbsp;
 import { NATIVE_TOKEN, Fee } from "./Fee.sol";
 import { Recorder } from "./Recorder.sol";
 import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import { TinyMerkleTree } from "@fifteenfigures/TinyMerkleTree.sol";
-import { Groth16Verifier } from "./Verifier.sol";
 &nbsp;
-contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16Verifier {
+contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard {
     using Extractor for bytes;
     using SafeERC20 for IERC20;
 &nbsp;
-    constructor (bytes32 initLeaf) TinyMerkleTree (initLeaf) {
+    IVerifier internal verifier;
+&nbsp;
+    constructor (bytes32 initLeaf, address _verifier) TinyMerkleTree (initLeaf) {
+        verifier = IVerifier(_verifier);
         emit DepositAdded(initLeaf);
     }
 &nbsp;
     receive() external payable {}
 &nbsp;
-    function deposit(bytes calldata depositKey, bytes32 standardizedKey) public payable {
-        if (_leafExists(standardizedKey)) revert KeyAlreadyUsed(standardizedKey);
-&nbsp;
-        (, address asset, uint256 amount) = depositKey._extractKeyMetadata();
+    function deposit(bytes calldata depositKey) public payable {
+        (bytes32 keyHash, address asset, uint256 amount) = depositKey._extractKeyMetadata();
+        bytes32 leaf = bytes32(PoseidonT4.hash([uint256(keyHash), uint256(uint160(asset)), amount]));
+        
+        if (_leafExists(leaf)) revert KeyAlreadyUsed(leaf);
 &nbsp;
         uint256 balance;
         
@@ -283,9 +303,9 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         <span class="missing-if-branch" title="else path not taken" >E</span>require(sent);
 &nbsp;
         _takeFee(IERC20(asset), amount);
-        _addLeaf(standardizedKey);
-        _recordDeposit(standardizedKey, asset);
-        emit DepositAdded(standardizedKey);
+        _addLeaf(leaf);
+        _recordDeposit(leaf, asset);
+        emit DepositAdded(leaf);
     }
     
     function withdraw(
@@ -303,7 +323,7 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         if (nullifierUsed[nullifier]) revert NullifierUsed(nullifier);
         nullifierUsed[nullifier] = true;
 &nbsp;
-        (, address asset, uint256 amountInKey) = withdrawalKey._extractKeyMetadata();
+        (bytes32 keyHash, address asset, uint256 amountInKey) = withdrawalKey._extractKeyMetadata();
 &nbsp;
         uint256 maxWithdrawable = _getMaxWithdrawalOnAmount(amountInKey);
         uint256 amountWithdrawn = withdrawals[withdrawalKey];
@@ -311,13 +331,17 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
         if ((amountWithdrawn + amount) &gt; maxWithdrawable) revert WithdrawalExceedsMax(amount);
         withdrawals[withdrawalKey] += amount;
 &nbsp;
-        uint256[929] memory publicSignals = Computer._computePublicSignals(root, withdrawalKey);
-        publicSignals[928] = nullifier;
+        uint256[5] memory publicSignals;
+        publicSignals[0] = uint256(root);
+        publicSignals[1] = uint256(keyHash);
+        publicSignals[2] = uint256(uint160(asset));
+        publicSignals[3] = uint256(amountInKey);
+        publicSignals[4] = nullifier;
 &nbsp;
-        if (!this.verifyProof(pA, pB, pC, publicSignals)) revert ProofNotVerified();
+        if (!verifier.verifyProof(pA, pB, pC, publicSignals)) revert ProofNotVerified();
 &nbsp;
         if (asset == NATIVE_TOKEN) {
-            (bool sent, ) = recipient.call { value: amount}("");
+            (bool sent, ) = recipient.call{ value: amount}("");
             <span class="missing-if-branch" title="else path not taken" >E</span>require(sent);
         } else IERC20(asset).safeTransfer(recipient, amount);
     }
@@ -329,7 +353,7 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
 &nbsp;
     function _rootIsInHistory(bytes32 root) private view returns (bool) {
         for (uint8 i = 0; i &lt; STORED_ROOT_LENGTH; i++) {
-            if (last32Roots[i] == root) return true;
+            if (last64Roots[i] == root) return true;
         }
 &nbsp;
         return false;
@@ -340,7 +364,7 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard, Groth16V
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Sep 17 2025 10:45:46 GMT+0100 (West Africa Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Sep 28 2025 21:43:13 GMT+0100 (West Africa Standard Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

@@ -3,6 +3,7 @@
 /* eslint-disable */
 export * as verifierSol from "./Verifier.sol";
 export * as interfaces from "./interfaces";
+export * as lib from "./lib";
 export * as mock from "./mock";
 export { Main__factory } from "./Main__factory";
 export { Recorder__factory } from "./Recorder__factory";
