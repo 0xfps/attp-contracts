@@ -1,58 +1,58 @@
 {
     "97": {
-        "addressAndTokens": {
-            "address": "0x4848B39E385b45A4B8F96F980AC568C9bA4ee9f1",
-            "usdc": "0xD0eA0Bcbf4FaDA718CdCf4076A90F5979f59c39c",
-            "usdt": "0xBd747Eb2F19B3c8c2e580E7599cBAECEe4cD9c4A",
-            "dai": "0x42b1Ec7BCdaeD5234CA4Dde9B694De717a26cEb2"
+        "addresses": {
+            "address": "0xdf776CAD69161ace07Ea7bAb3d7C74677439A247",
+            "usdc": "0xB29fEDDEFF154Cf0293bF0e7bef5BA357B9f0324",
+            "usdt": "0x009c85f0dd55FdADD4aDF97F0f2cAfEC7edA93b7",
+            "dai": "0x47F8BBa4AAAf445Cb76AD82588C4Baf744d32970"
         }
     },
     "43113": {
-        "addressAndTokens": {
-            "address": "0xdbf75825DcDFB08f758b232e3F549C8367e340D0",
-            "usdc": "0x59cc8d9E1280F86aaA730cCfB3c91Ea9814Fb2F3",
-            "usdt": "0xc39cb6Ead29bAb4c648F3BDC3bA7B6688250c315",
-            "dai": "0xCD774B49274FEf89D5FEBC347Ad0D1960dA17F6c"
+        "addresses": {
+            "address": "0xD0eA0Bcbf4FaDA718CdCf4076A90F5979f59c39c",
+            "usdc": "0xBd747Eb2F19B3c8c2e580E7599cBAECEe4cD9c4A",
+            "usdt": "0x42b1Ec7BCdaeD5234CA4Dde9B694De717a26cEb2",
+            "dai": "0xe595c98C208AAB15992F558696DD7113f364C173"
         }
     },
     "80002": {
-        "addressAndTokens": {
-            "address": "0x4848B39E385b45A4B8F96F980AC568C9bA4ee9f1",
-            "usdc": "0xD0eA0Bcbf4FaDA718CdCf4076A90F5979f59c39c",
-            "usdt": "0xBd747Eb2F19B3c8c2e580E7599cBAECEe4cD9c4A",
-            "dai": "0x42b1Ec7BCdaeD5234CA4Dde9B694De717a26cEb2"
+        "addresses": {
+            "address": "0xdf776CAD69161ace07Ea7bAb3d7C74677439A247",
+            "usdc": "0xB29fEDDEFF154Cf0293bF0e7bef5BA357B9f0324",
+            "usdt": "0x009c85f0dd55FdADD4aDF97F0f2cAfEC7edA93b7",
+            "dai": "0x47F8BBa4AAAf445Cb76AD82588C4Baf744d32970"
         }
     },
     "84532": {
-        "addressAndTokens": {
-            "address": "0xdbf75825DcDFB08f758b232e3F549C8367e340D0",
-            "usdc": "0x59cc8d9E1280F86aaA730cCfB3c91Ea9814Fb2F3",
-            "usdt": "0xc39cb6Ead29bAb4c648F3BDC3bA7B6688250c315",
-            "dai": "0xCD774B49274FEf89D5FEBC347Ad0D1960dA17F6c"
+        "addresses": {
+            "address": "0xD0eA0Bcbf4FaDA718CdCf4076A90F5979f59c39c",
+            "usdc": "0xBd747Eb2F19B3c8c2e580E7599cBAECEe4cD9c4A",
+            "usdt": "0x42b1Ec7BCdaeD5234CA4Dde9B694De717a26cEb2",
+            "dai": "0xe595c98C208AAB15992F558696DD7113f364C173"
         }
     },
     "421614": {
-        "addressAndTokens": {
-            "address": "0xA895580745C5F4467EeF426B46DAD24956d49a95",
-            "usdc": "0x4848B39E385b45A4B8F96F980AC568C9bA4ee9f1",
-            "usdt": "0xD0eA0Bcbf4FaDA718CdCf4076A90F5979f59c39c",
-            "dai": "0xBd747Eb2F19B3c8c2e580E7599cBAECEe4cD9c4A"
+        "addresses": {
+            "address": "0xAbf327733E60191839A903e724C0BA13a6D22c1e",
+            "usdc": "0xdf776CAD69161ace07Ea7bAb3d7C74677439A247",
+            "usdt": "0xB29fEDDEFF154Cf0293bF0e7bef5BA357B9f0324",
+            "dai": "0x009c85f0dd55FdADD4aDF97F0f2cAfEC7edA93b7"
         }
     },
     "11155111": {
-        "addressAndTokens": {
-            "address": "0x009c85f0dd55FdADD4aDF97F0f2cAfEC7edA93b7",
-            "usdc": "0x47F8BBa4AAAf445Cb76AD82588C4Baf744d32970",
-            "usdt": "0xDd42Ac2A91C0579F1EDFbA7E7ec95ffce4dBF379",
-            "dai": "0x512A3448Ac8750eC9Eb17Ad6Dc692C306B915B76"
+        "addresses": {
+            "address": "0x7ED93B46FbCEc7E040a51aF7E69235e9C6d86ED1",
+            "usdc": "0x4B55d0896e7C85cC570340EC018237C3b79d5b04",
+            "usdt": "0x1999531D8Bccaf86141D75d14ee185268a378ed8",
+            "dai": "0x443FB8343c1B51719F4e3c567909bA7edb128e21"
         }
     },
     "11155420": {
-        "addressAndTokens": {
-            "address": "0x59cc8d9E1280F86aaA730cCfB3c91Ea9814Fb2F3",
-            "usdc": "0xc39cb6Ead29bAb4c648F3BDC3bA7B6688250c315",
-            "usdt": "0xCD774B49274FEf89D5FEBC347Ad0D1960dA17F6c",
-            "dai": "0x1Cc91f87bfc29AB0c21AD1Cdfd6BDEa9461f48a1"
+        "addresses": {
+            "address": "0xBd747Eb2F19B3c8c2e580E7599cBAECEe4cD9c4A",
+            "usdc": "0x42b1Ec7BCdaeD5234CA4Dde9B694De717a26cEb2",
+            "usdt": "0xe595c98C208AAB15992F558696DD7113f364C173",
+            "dai": "0x6464FCA34c13c98Ad14F26B7525Ad4FdBa9f1b02"
         }
     }
 }

@@ -19,14 +19,14 @@ export function setupFiles() {
     }
 }
 
-export function writeFiles(chainId: number, addressAndTokens: Object, ) {
+export function writeFiles(chainId: number, addresses: Object,) {
     for (const dirPath of DIRECTORY_PATHS) {
         const filePath = path.join(__dirname, dirPath, FILE_NAME)
         const fileContents = JSON.parse(readFileSync(filePath) as any)
         const updatedContents = {
             ...fileContents,
             [chainId]: {
-                addressAndTokens,
+                addresses,
             }
         }
 
