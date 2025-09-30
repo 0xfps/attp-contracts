@@ -111,13 +111,13 @@ async function deploy() {
         // })
     }
 
-    const addressAndTokens = {
+    const addresses = {
         address: mainAddress,
         ...tokens
     }
     console.log("Deployed all tokens.")
 
-    writeFiles(chainId!, addressAndTokens)
+    writeFiles(chainId!, addresses)
 }
 
 deploy().then(function () {
