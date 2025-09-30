@@ -208,7 +208,7 @@ describe("Withdrawal Tests", function () {
         //     secretKey: inputObjects.secretKey.toString()
         // }))
 
-        const nullifier = BigInt(inputObjects.nullifier)
+        const nullifier = BigInt(inputObjects.nullifier.toString())
         usedNullifier = nullifier
 
         const { proof } = await groth16.fullProve(inputObjects as any, wasmPath, zkeyPath)
