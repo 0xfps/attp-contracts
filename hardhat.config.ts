@@ -22,7 +22,15 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY!
+    apiKey: process.env.ETHERSCAN_API_KEY!,
+    customChains: [{
+      network: "optimismSepolia",
+      chainId: 11155420,
+      urls: {
+        apiURL: "https://api-sepolia-optimistic.etherscan.io/api",
+        browserURL: "https://testnet-explorer.optimism.io"
+      }
+    }]
   },
   networks: {
     hardhat: {

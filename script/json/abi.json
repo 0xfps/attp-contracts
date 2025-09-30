@@ -10,6 +10,14 @@
                     "components": null,
                     "arrayLength": null,
                     "arrayChildren": null
+                },
+                {
+                    "name": "_verifier",
+                    "type": "address",
+                    "baseType": "address",
+                    "components": null,
+                    "arrayLength": null,
+                    "arrayChildren": null
                 }
             ],
             "payable": false,
@@ -140,14 +148,6 @@
                     "name": "depositKey",
                     "type": "bytes",
                     "baseType": "bytes",
-                    "components": null,
-                    "arrayLength": null,
-                    "arrayChildren": null
-                },
-                {
-                    "name": "standardizedKey",
-                    "type": "bytes32",
-                    "baseType": "bytes32",
                     "components": null,
                     "arrayLength": null,
                     "arrayChildren": null
@@ -323,93 +323,6 @@
                 }
             ],
             "name": "userHasDeposited",
-            "constant": true,
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "bool",
-                    "baseType": "bool",
-                    "components": null,
-                    "arrayLength": null,
-                    "arrayChildren": null
-                }
-            ],
-            "stateMutability": "view",
-            "payable": false,
-            "gas": null
-        },
-        {
-            "type": "function",
-            "inputs": [
-                {
-                    "name": "_pA",
-                    "type": "uint256[2]",
-                    "baseType": "array",
-                    "components": null,
-                    "arrayLength": 2,
-                    "arrayChildren": {
-                        "name": "",
-                        "type": "uint256",
-                        "baseType": "uint256",
-                        "components": null,
-                        "arrayLength": null,
-                        "arrayChildren": null
-                    }
-                },
-                {
-                    "name": "_pB",
-                    "type": "uint256[2][2]",
-                    "baseType": "array",
-                    "components": null,
-                    "arrayLength": 2,
-                    "arrayChildren": {
-                        "name": "",
-                        "type": "uint256[2]",
-                        "baseType": "array",
-                        "components": null,
-                        "arrayLength": 2,
-                        "arrayChildren": {
-                            "name": "",
-                            "type": "uint256",
-                            "baseType": "uint256",
-                            "components": null,
-                            "arrayLength": null,
-                            "arrayChildren": null
-                        }
-                    }
-                },
-                {
-                    "name": "_pC",
-                    "type": "uint256[2]",
-                    "baseType": "array",
-                    "components": null,
-                    "arrayLength": 2,
-                    "arrayChildren": {
-                        "name": "",
-                        "type": "uint256",
-                        "baseType": "uint256",
-                        "components": null,
-                        "arrayLength": null,
-                        "arrayChildren": null
-                    }
-                },
-                {
-                    "name": "_pubSignals",
-                    "type": "uint256[929]",
-                    "baseType": "array",
-                    "components": null,
-                    "arrayLength": 929,
-                    "arrayChildren": {
-                        "name": "",
-                        "type": "uint256",
-                        "baseType": "uint256",
-                        "components": null,
-                        "arrayLength": null,
-                        "arrayChildren": null
-                    }
-                }
-            ],
-            "name": "verifyProof",
             "constant": true,
             "outputs": [
                 {

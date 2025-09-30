@@ -1,1 +1,58 @@
-{}
+{
+    "97": {
+        "addressAndTokens": {
+            "address": "0x4848B39E385b45A4B8F96F980AC568C9bA4ee9f1",
+            "usdc": "0xD0eA0Bcbf4FaDA718CdCf4076A90F5979f59c39c",
+            "usdt": "0xBd747Eb2F19B3c8c2e580E7599cBAECEe4cD9c4A",
+            "dai": "0x42b1Ec7BCdaeD5234CA4Dde9B694De717a26cEb2"
+        }
+    },
+    "43113": {
+        "addressAndTokens": {
+            "address": "0xdbf75825DcDFB08f758b232e3F549C8367e340D0",
+            "usdc": "0x59cc8d9E1280F86aaA730cCfB3c91Ea9814Fb2F3",
+            "usdt": "0xc39cb6Ead29bAb4c648F3BDC3bA7B6688250c315",
+            "dai": "0xCD774B49274FEf89D5FEBC347Ad0D1960dA17F6c"
+        }
+    },
+    "80002": {
+        "addressAndTokens": {
+            "address": "0x4848B39E385b45A4B8F96F980AC568C9bA4ee9f1",
+            "usdc": "0xD0eA0Bcbf4FaDA718CdCf4076A90F5979f59c39c",
+            "usdt": "0xBd747Eb2F19B3c8c2e580E7599cBAECEe4cD9c4A",
+            "dai": "0x42b1Ec7BCdaeD5234CA4Dde9B694De717a26cEb2"
+        }
+    },
+    "84532": {
+        "addressAndTokens": {
+            "address": "0xdbf75825DcDFB08f758b232e3F549C8367e340D0",
+            "usdc": "0x59cc8d9E1280F86aaA730cCfB3c91Ea9814Fb2F3",
+            "usdt": "0xc39cb6Ead29bAb4c648F3BDC3bA7B6688250c315",
+            "dai": "0xCD774B49274FEf89D5FEBC347Ad0D1960dA17F6c"
+        }
+    },
+    "421614": {
+        "addressAndTokens": {
+            "address": "0xA895580745C5F4467EeF426B46DAD24956d49a95",
+            "usdc": "0x4848B39E385b45A4B8F96F980AC568C9bA4ee9f1",
+            "usdt": "0xD0eA0Bcbf4FaDA718CdCf4076A90F5979f59c39c",
+            "dai": "0xBd747Eb2F19B3c8c2e580E7599cBAECEe4cD9c4A"
+        }
+    },
+    "11155111": {
+        "addressAndTokens": {
+            "address": "0x009c85f0dd55FdADD4aDF97F0f2cAfEC7edA93b7",
+            "usdc": "0x47F8BBa4AAAf445Cb76AD82588C4Baf744d32970",
+            "usdt": "0xDd42Ac2A91C0579F1EDFbA7E7ec95ffce4dBF379",
+            "dai": "0x512A3448Ac8750eC9Eb17Ad6Dc692C306B915B76"
+        }
+    },
+    "11155420": {
+        "addressAndTokens": {
+            "address": "0x59cc8d9E1280F86aaA730cCfB3c91Ea9814Fb2F3",
+            "usdc": "0xc39cb6Ead29bAb4c648F3BDC3bA7B6688250c315",
+            "usdt": "0xCD774B49274FEf89D5FEBC347Ad0D1960dA17F6c",
+            "dai": "0x1Cc91f87bfc29AB0c21AD1Cdfd6BDEa9461f48a1"
+        }
+    }
+}
