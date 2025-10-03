@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import { ethers } from "hardhat"
 import { MINT_VALUE, recipient, SECRET_KEY_LENGTH } from "../constants"
-import TinyMerkleTree, { CircomInputObject, generatekeys, getInputObjects, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/tiny-merkle-tree"
+import TinyMerkleTree, { CircomInputObject, extractKeyMetadata, generatekeys, getInputObjects, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/tiny-merkle-tree"
 import { Main, MockERC20 } from "../../typechain-types"
 import { BigNumberish, Signer, ZeroAddress } from "ethers"
 import assert from "node:assert/strict"
@@ -77,7 +77,9 @@ describe("Withdrawal Tests", function () {
         const aliceETHBalanceBefore = await ethers.provider.getBalance(aliceAddress)
 
         await mockERC20Token.connect(alice).approve(mainContractAddress, amount)
-        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(4e18) })
+        const { keyHash, asset, amount: amt } = extractKeyMetadata(depositKey)
+        
+        await mainContract.connect(alice).deposit(keyHash, asset, BigInt(amt.toString()), { value: BigInt(4e18) })
 
         const aliceETHBalanceAfter = await ethers.provider.getBalance(aliceAddress)
         const assumedGas = 5e15
@@ -155,7 +157,9 @@ describe("Withdrawal Tests", function () {
         const aliceETHBalanceBefore = await ethers.provider.getBalance(aliceAddress)
 
         await mockERC20Token.connect(alice).approve(mainContractAddress, amount)
-        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(4e18) })
+        const { keyHash, asset, amount: amt } = extractKeyMetadata(depositKey)
+        
+        await mainContract.connect(alice).deposit(keyHash, asset, BigInt(amt.toString()), { value: BigInt(4e18) })
 
         const aliceETHBalanceAfter = await ethers.provider.getBalance(aliceAddress)
         const assumedGas = 5e15
@@ -174,8 +178,10 @@ describe("Withdrawal Tests", function () {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { withdrawalKey, depositKey } = generatekeys(ZeroAddress, BigInt(1e15), secretKey)
         const standardizedKey = getLeafFromKey(depositKey)
+        const { keyHash, asset, amount: amt } = extractKeyMetadata(depositKey)
+        
 
-        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(1e15) })
+        await mainContract.connect(alice).deposit(keyHash, asset, BigInt(amt.toString()), { value: BigInt(1e15) })
 
         stdKey = standardizedKey
         wKey = withdrawalKey
