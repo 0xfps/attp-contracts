@@ -87,9 +87,19 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "bytes",
-        name: "depositKey",
-        type: "bytes",
+        internalType: "bytes32",
+        name: "commitment",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
       },
     ],
     name: "deposit",
