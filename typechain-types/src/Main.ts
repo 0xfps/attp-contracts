@@ -68,10 +68,7 @@ export interface MainInterface extends Interface {
 
   getEvent(nameOrSignatureOrTopic: "DepositAdded"): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "deposit",
-    values: [BytesLike, AddressLike, BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: "deposit", values: [BytesLike]): string;
   encodeFunctionData(
     functionFragment: "getDepositDelta",
     values: [BytesLike]
@@ -181,11 +178,7 @@ export interface Main extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
-  deposit: TypedContractMethod<
-    [commitment: BytesLike, asset: AddressLike, amount: BigNumberish],
-    [void],
-    "payable"
-  >;
+  deposit: TypedContractMethod<[depositKey: BytesLike], [void], "payable">;
 
   getDepositDelta: TypedContractMethod<
     [standardizedKey: BytesLike],
@@ -232,11 +225,7 @@ export interface Main extends BaseContract {
 
   getFunction(
     nameOrSignature: "deposit"
-  ): TypedContractMethod<
-    [commitment: BytesLike, asset: AddressLike, amount: BigNumberish],
-    [void],
-    "payable"
-  >;
+  ): TypedContractMethod<[depositKey: BytesLike], [void], "payable">;
   getFunction(
     nameOrSignature: "getDepositDelta"
   ): TypedContractMethod<

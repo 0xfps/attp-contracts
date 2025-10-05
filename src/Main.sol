@@ -27,8 +27,9 @@ contract Main is IMain, Recorder, Fee, TinyMerkleTree, ReentrancyGuard {
 
     receive() external payable {}
 
-    function deposit(bytes32 commitment, address asset, uint256 amount) public payable {
-        bytes32 leaf = bytes32(PoseidonT4.hash([uint256(commitment), uint256(uint160(asset)), amount]));
+    function deposit(bytes calldata depositKey) public payable {
+        (bytes32 keyHash, address asset, uint256 amount) = depositKey._extractKeyMetadata();
+        bytes32 leaf = bytes32(PoseidonT4.hash([uint256(keyHash), uint256(uint160(asset)), amount]));
         
         if (_leafExists(leaf)) revert KeyAlreadyUsed(leaf);
 

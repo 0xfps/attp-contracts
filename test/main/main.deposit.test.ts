@@ -1,6 +1,6 @@
 import { ethers } from "hardhat"
 import { collector, MINT_VALUE, sCollector, SECRET_KEY_LENGTH } from "../constants"
-import TinyMerkleTree, { extractKeyMetadata, generatekeys, getMaxWithdrawalOnAmount, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/tiny-merkle-tree"
+import TinyMerkleTree, { generatekeys, getMaxWithdrawalOnAmount, getRandomNullifier, hashNums, standardizeToPoseidon } from "@fifteenfigures/tiny-merkle-tree"
 import { Main, MockERC20 } from "../../typechain-types"
 import Randomstring from "randomstring"
 import { encodeBytes32String, Signer, ZeroAddress } from "ethers"
@@ -88,9 +88,7 @@ describe("Deposit Tests", function () {
         const aliceETHBalanceBefore = await ethers.provider.getBalance(aliceAddress)
 
         await mockERC20Token.connect(alice).approve(mainContractAddress, amount)
-        const { keyHash, asset, amount: amt } = extractKeyMetadata(depositKey)
-        
-        await mainContract.connect(alice).deposit(keyHash, asset, BigInt(amt.toString()), { value: BigInt(4e18) })
+        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(4e18) })
 
         const aliceETHBalanceAfter = await ethers.provider.getBalance(aliceAddress)
         const assumedGas = 5e15
@@ -106,9 +104,8 @@ describe("Deposit Tests", function () {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { depositKey } = generatekeys(ZeroAddress, BigInt(1e18), secretKey)
 
-        const { keyHash, asset, amount: amt } = extractKeyMetadata(depositKey)
         await expect(
-            mainContract.connect(alice).deposit(keyHash, asset, BigInt(amt.toString()), { value: BigInt(1e18) - 1n })
+            mainContract.connect(alice).deposit(depositKey, { value: BigInt(1e18) - 1n })
         ).to.be.revertedWithCustomError(mainContract, "ETHSentLessThanDeposit")
     })
 
@@ -116,9 +113,8 @@ describe("Deposit Tests", function () {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { depositKey } = generatekeys(ZeroAddress, BigInt(1e18), secretKey)
         const standardizedKey = getLeafFromKey(depositKey)
-        const { keyHash, asset, amount: amt } = extractKeyMetadata(depositKey)
-        
-        await mainContract.connect(alice).deposit(keyHash, asset, BigInt(amt.toString()), { value: BigInt(1e18) })
+
+        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(1e18) })
 
         leaves.push(standardizedKey)
         assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
@@ -128,9 +124,8 @@ describe("Deposit Tests", function () {
         const secretKey = Randomstring.generate({ length: SECRET_KEY_LENGTH, charset: "alphanumeric" })
         const { depositKey } = generatekeys(ZeroAddress, BigInt(1e18), secretKey)
         const stdKey = getLeafFromKey(depositKey)
-        const { keyHash, asset, amount: amt } = extractKeyMetadata(depositKey)
-        
-        await mainContract.connect(alice).deposit(keyHash, asset, BigInt(amt.toString()), { value: BigInt(1e18) + 1n })
+
+        await mainContract.connect(alice).deposit(depositKey, { value: BigInt(1e18) + 1n })
 
         leaves.push(stdKey)
         assert(await mainContract.root() == new TinyMerkleTree(leaves).root)
@@ -138,12 +133,11 @@ describe("Deposit Tests", function () {
 
     it("Should fail if leaf is repeated.", async function () {
         await mockERC20Token.connect(alice).approve(mainContractAddress, amount)
-        const { keyHash, asset, amount: amt } = extractKeyMetadata(depKey)
-        
+
         await expect(
             mainContract
                 .connect(alice)
-                .deposit(keyHash, asset, BigInt(amt.toString()),)
+                .deposit(depKey)
         ).to.be.revertedWithCustomError(mainContract, "KeyAlreadyUsed")
     })
 
@@ -154,7 +148,7 @@ describe("Deposit Tests", function () {
         const standardizedKeyDelta = await mainContract.getDepositDelta(stdKey)
         const { depositor, asset, amountAfterDeposit } = standardizedKeyDelta.info
         const { uniqueDeposits, currentDeposit } = standardizedKeyDelta
-        
+
         assert(depositor == aliceAddress)
         assert(asset == mockAsset)
         assert(amountAfterDeposit == getMaxWithdrawalOnAmount(amount))

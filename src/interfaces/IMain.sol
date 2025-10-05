@@ -11,7 +11,7 @@ interface IMain {
     error RootNotInHistory(bytes32 root);
     error WithdrawalExceedsMax(uint256 withdrawal);
 
-    function deposit(bytes32 commitment, address asset, uint256 amount) external payable;
+    function deposit(bytes calldata depositKey) external payable;
 
     function withdraw(
         bytes32 root,
