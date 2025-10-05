@@ -28,10 +28,7 @@ export interface IMainInterface extends Interface {
 
   getEvent(nameOrSignatureOrTopic: "DepositAdded"): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "deposit",
-    values: [BytesLike, AddressLike, BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: "deposit", values: [BytesLike]): string;
   encodeFunctionData(
     functionFragment: "withdraw",
     values: [
@@ -105,11 +102,7 @@ export interface IMain extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
-  deposit: TypedContractMethod<
-    [commitment: BytesLike, asset: AddressLike, amount: BigNumberish],
-    [void],
-    "payable"
-  >;
+  deposit: TypedContractMethod<[depositKey: BytesLike], [void], "payable">;
 
   withdraw: TypedContractMethod<
     [
@@ -132,11 +125,7 @@ export interface IMain extends BaseContract {
 
   getFunction(
     nameOrSignature: "deposit"
-  ): TypedContractMethod<
-    [commitment: BytesLike, asset: AddressLike, amount: BigNumberish],
-    [void],
-    "payable"
-  >;
+  ): TypedContractMethod<[depositKey: BytesLike], [void], "payable">;
   getFunction(
     nameOrSignature: "withdraw"
   ): TypedContractMethod<

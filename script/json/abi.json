@@ -145,25 +145,9 @@
             "type": "function",
             "inputs": [
                 {
-                    "name": "commitment",
-                    "type": "bytes32",
-                    "baseType": "bytes32",
-                    "components": null,
-                    "arrayLength": null,
-                    "arrayChildren": null
-                },
-                {
-                    "name": "asset",
-                    "type": "address",
-                    "baseType": "address",
-                    "components": null,
-                    "arrayLength": null,
-                    "arrayChildren": null
-                },
-                {
-                    "name": "amount",
-                    "type": "uint256",
-                    "baseType": "uint256",
+                    "name": "depositKey",
+                    "type": "bytes",
+                    "baseType": "bytes",
                     "components": null,
                     "arrayLength": null,
                     "arrayChildren": null
